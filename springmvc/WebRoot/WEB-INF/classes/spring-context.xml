@@ -35,4 +35,5 @@
         <property name="basePackage" value="com.jlc.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean> 
+    <import resource="classpath:spring-shiro.xml"/>
 </beans>

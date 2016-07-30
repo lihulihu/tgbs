@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wangzhixuan.mapper.ResourceMapper">
-    <resultMap id="BaseResultMap" type="com.wangzhixuan.model.Resource">
+<mapper namespace="com.jlc.dao.ResourceMapper">
+    <resultMap id="BaseResultMap" type="com.jlc.bean.Resource">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
@@ -53,7 +53,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-    <insert id="insert" parameterType="com.wangzhixuan.model.Resource">
+    <insert id="insert" parameterType="com.jlc.bean.Resource">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -65,7 +65,7 @@
         #{resourcetype,jdbcType=TINYINT}, now())
     </insert>
 
-    <update id="updateResource" parameterType="com.wangzhixuan.model.Resource">
+    <update id="updateResource" parameterType="com.jlc.bean.Resource">
         update resource
         <set>
             <if test="name != null">
