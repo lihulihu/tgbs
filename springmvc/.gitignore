@@ -1,7 +1,4 @@
-.settings/*
-build/*
+.settings/
 .classpath
-.project
-/bin/
-
-/WebRoot/WEB-INF/classes/
+WebRoot/WEB-INF/classes/
+.metadata/
