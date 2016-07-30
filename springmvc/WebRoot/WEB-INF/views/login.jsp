@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>用户登录-如梦技术IT-专业的java学习培训平台</title>
-    <meta name="keywords" content="如梦技术,java职业教育,java线教育平台,java在线学习,spring,mybatis,spring-boot,docker">
-    <meta name="description" content="如梦技术作为中国最权威的java在线教育平台,拥有海量高清java职业课程,涵盖个个组件,根据java在线学习特点,如梦技术推出java学习知识体系图,java职业学习实战路径图,帮助java学习者从零基础起步,结合java实战案例演练,系统学习,助你快速成为java优秀技术人才！">
+    <title>用户登录</title>
+   
+   
     <meta name="viewport" content="width=device-width">
     <%@ include file="/commons/basejs.jsp" %>
     <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/login.css" />
@@ -22,7 +22,7 @@
         </div>
         <P style="padding: 30px 0px 10px; position: relative;">
             <span class="u_logo"></span>
-            <input class="ipt" type="text" name="username" placeholder="请输入用户名或邮箱" value="" />
+            <input class="ipt" type="text" name="username" placeholder="请输入用户名" value="" />
         </P>
         <P style="position: relative;">
             <span class="p_logo"></span>
@@ -34,7 +34,7 @@
                     <a style="color: rgb(204, 204, 204);" href="javascript:;">忘记密码?</a>
                 </span>
                 <span style="float: right;">
-                    <a style="color: rgb(204, 204, 204); margin-right: 10px;" href="javascript:;">注册</a>
+                    
                     <a style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" href="javascript:;" onclick="submitForm()">登录</a>
                 </span>
             </P>
@@ -42,7 +42,7 @@
     </form>
 </div>
 <div style="text-align:center;">
-    <p><a href="http://www.dreamlu.net/" target="_blank">如梦技术</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
+    <p><a href="http://www.dreamlu.net/" target="_blank">欢迎使用研究生信息管理系统</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
 </div>
 </body>
 </html>

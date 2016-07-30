@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,62 +113,20 @@
         <div data-options="region:'west',split:true" title="菜单" style="width: 160px; overflow: hidden;overflow-y:auto; padding:0px">
             <div class="easyui-accordion  i_accordion_menu" fit="true" border="false">
 
-                <div title="系统管理" selected="true" style="overflow: auto;">
-                    <div class="nav-item">
-                        <a href="javascript:addTab('用户管理','${path}/user/manager','menu_icon_datadeal')">
+                <div title="我的菜单" selected="true" style="overflow: auto;">
+                   
+                    <c:forEach var="list" items="${resource}">
+						
+						<div class="nav-item">
+                       	 <a href="javascript:addTab('${list.getTreeName()}','${path}+${list.getTreeUrl()}','menu_icon_datadeal')">
                             <span class="menu_icon_datadeal"></span>
-                            <span>用户管理</span>
-                        </a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:addTab('部门管理','${path}/organization/manager','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>部门管理</span>
-                        </a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:addTab('角色管理','${path}/role/manager','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>角色管理</span>
-                        </a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:addTab('资源管理','${path}/resource/manager','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>资源管理</span>
-                        </a>
-                    </div>
+                            <span>${list.getTreeName()}</span>
+                       	 </a>
+                   	 </div>
+					</c:forEach>
                 </div>
 
-                <div title="视频教程" style="overflow: auto;">
-                    <div class="nav-item">
-                        <a href="javascript:addTab('官方网站','http://www.dreamlu.net','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>官方网站</span>
-                        </a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:addTab('jfinal视频','http://blog.dreamlu.net/blog/79','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>Jfinal视频</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div title="日志管理" style="overflow: auto;">
-                    <div class="nav-item">
-                        <a href="javascript:addTab('登录日志','${path}/sysLog/manager','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>登录日志</span>
-                        </a>
-                    </div>
-                    <div class="nav-item">
-                        <a href="javascript:addTab('Druid监控','${path}/druid','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>Druid监控</span>
-                        </a>
-                    </div>
-                </div>
+                
             </div>
 
         </div>

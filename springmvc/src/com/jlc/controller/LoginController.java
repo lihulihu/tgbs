@@ -1,6 +1,16 @@
 package com.jlc.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.jlc.bean.User;
+import com.jlc.bean.tree;
 import com.jlc.commons.base.BaseController;
+import com.jlc.service.TreeService;
+import com.jlc.service.UserService;
+import com.jlc.shiro.ShiroUser;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -8,7 +18,9 @@ import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +34,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class LoginController extends BaseController {
+	
+	@Autowired
+    private UserService userService;
+	
+	@Autowired
+	private TreeService treeService;
+	
     /**
      * 首页
      *
@@ -40,6 +59,17 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/index")
     public String index(Model model) {
+    	Subject subject = SecurityUtils.getSubject();
+    	ShiroUser user = (ShiroUser) subject.getPrincipal();
+    	String name = user.getName();
+    	User userMessage = userService.findUserByLoginName(name);
+    	Session session = subject.getSession();
+    	session.setAttribute("user",userMessage);
+    	String type = userMessage.getUsertype().toString();
+    	Map map = new HashMap();
+    	map.put("permission", type);
+    	List<tree> resultList = treeService.selectByParam(map);
+    	model.addAttribute("resource", resultList);
         return "index";
     }
 
