@@ -4,22 +4,21 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.jlc.bean.User;
 import com.jlc.commons.result.UserVo;
 import com.jlc.commons.utils.PageInfo;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long id) throws Exception;
 
-    int insert(User record);
+    int insert(UserVo record) throws Exception;
 
-    int insertSelective(User record);
+    int insertSelective(UserVo record) throws Exception;
 
-    User selectByPrimaryKey(Long id);
+    UserVo selectByPrimaryKey(Long id) throws Exception;
 
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(UserVo record) throws Exception;
 
-    int updateByPrimaryKey(User record);
+    int updateByPrimaryKey(UserVo record) throws Exception;
     
     /**
      * 根据用户名查询用户
@@ -27,14 +26,14 @@ public interface UserMapper {
      * @param username
      * @return
      */
-    User findUserByLoginName(String username);
+    UserVo findUserByLoginName(String username);
     /**
      * 根据用户id查询用户
      *
      * @param id
      * @return
      */
-    User findUserById(Long id);
+    UserVo findUserById(Long id);
     /**
      * 用户列表
      *

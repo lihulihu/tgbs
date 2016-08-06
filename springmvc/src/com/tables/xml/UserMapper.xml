@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jlc.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.jlc.bean.User">
+  <resultMap id="BaseResultMap" type="com.jlc.commons.result.UserVo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="loginname" jdbcType="VARCHAR" property="loginname" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="sex" jdbcType="TINYINT" property="sex" />
-    <result column="age" jdbcType="TINYINT" property="age" />
-    <result column="usertype" jdbcType="TINYINT" property="usertype" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="usertype" jdbcType="VARCHAR" property="usertype" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="organization_id" jdbcType="INTEGER" property="organizationId" />
     <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -30,13 +30,25 @@
         <result column="loginname" property="loginname" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="sex" property="sex" jdbcType="TINYINT"/>
-        <result column="age" property="age" jdbcType="TINYINT"/>
-        <result column="usertype" property="usertype" jdbcType="TINYINT"/>
-        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="VARCHAR"/>
+        <result column="usertype" property="usertype" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
         <result column="organization_id" property="organizationId" jdbcType="INTEGER"/>
         <result column="createdate" property="createdate" jdbcType="TIMESTAMP"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        
+        <result column="school" jdbcType="VARCHAR" property="school" />
+   		<result column="profession" jdbcType="VARCHAR" property="profession" />
+   	    <result column="interest" jdbcType="VARCHAR" property="interest" />
+        <result column="place" jdbcType="VARCHAR" property="place" />
+        <result column="height" jdbcType="VARCHAR" property="height" />
+        <result column="nation" jdbcType="VARCHAR" property="nation" />
+        <result column="birthday" jdbcType="DATE" property="birthday" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="photo" jdbcType="VARCHAR" property="photo" />
+        <result column="academy" jdbcType="VARCHAR" property="academy" />
+        <result column="grade" jdbcType="VARCHAR" property="grade" />
 
         <result column="organizationName" property="organizationName" jdbcType="VARCHAR"/>
 
@@ -60,7 +72,7 @@
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.jlc.bean.User">
+  <insert id="insert" parameterType="com.jlc.commons.result.UserVo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -73,15 +85,15 @@
       photo, academy, grade
       )
     values (#{loginname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{usertype,jdbcType=TINYINT}, 
-      #{status,jdbcType=TINYINT}, #{organizationId,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{usertype,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{organizationId,jdbcType=INTEGER},now(), 
       #{phone,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
       #{interest,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
       #{nation,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, 
       #{photo,jdbcType=VARCHAR}, #{academy,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jlc.bean.User">
+  <insert id="insertSelective" parameterType="com.jlc.commons.result.UserVo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -162,16 +174,16 @@
         #{password,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=TINYINT},
+        #{sex,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
-        #{age,jdbcType=TINYINT},
+        #{age,jdbcType=VARCHAR},
       </if>
       <if test="usertype != null">
-        #{usertype,jdbcType=TINYINT},
+        #{usertype,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="organizationId != null">
         #{organizationId,jdbcType=INTEGER},
@@ -217,7 +229,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.bean.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.commons.result.UserVo">
     update user
     <set>
       <if test="loginname != null">
@@ -230,16 +242,16 @@
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=TINYINT},
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
-        age = #{age,jdbcType=TINYINT},
+        age = #{age,jdbcType=VARCHAR},
       </if>
       <if test="usertype != null">
-        usertype = #{usertype,jdbcType=TINYINT},
+        usertype = #{usertype,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=VARCHAR},
       </if>
       <if test="organizationId != null">
         organization_id = #{organizationId,jdbcType=INTEGER},
@@ -286,15 +298,15 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jlc.bean.User">
+  <update id="updateByPrimaryKey" parameterType="com.jlc.commons.result.UserVo">
     update user
     set loginname = #{loginname,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=TINYINT},
-      age = #{age,jdbcType=TINYINT},
-      usertype = #{usertype,jdbcType=TINYINT},
-      status = #{status,jdbcType=TINYINT},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
       organization_id = #{organizationId,jdbcType=INTEGER},
       createdate = #{createdate,jdbcType=TIMESTAMP},
       phone = #{phone,jdbcType=VARCHAR},
@@ -326,30 +338,47 @@
     <select id="findUserPageCondition" resultMap="userVoResultMap" parameterType="PageInfo">
         SELECT
         t.id,
-        loginname,
-        t.`name`,
-        `password`,
-        sex,
-        age,
-        usertype,
-        t.`status`,
-        organization_id,
+        t.loginname,
+        t.name,
+        t.password,
+        t.sex,
+        t.age,
+        t.usertype,
+        t.status,
+        t.organization_id,
         t.createdate,
-        phone,
-        s.`name` AS organizationName,
+        t.phone,
+        
+        t.school, 
+        t.profession, 
+        t.interest, 
+        t.place, 
+        t.height, 
+        t.nation, 
+        t.birthday, 
+        t.remark, 
+        t.photo, 
+    	t.academy, 
+    	t.grade,
+        
+        s.name AS organizationName,
         o.id AS roleId,
-        o.`name` AS roleName
+        o.name AS roleName
         FROM
         user t
         LEFT JOIN user_role r ON t.id = r.user_id
         LEFT JOIN role o ON r.role_id = o.id
         LEFT JOIN organization s ON s.id = t.organization_id
-        <where>
+        <trim prefix="WHERE" prefixOverrides="AND|OR ">
             <if test=" condition.name != null and condition.name != '' ">
                 t.name = #{condition.name}
             </if>
+            and t.usertype = "1"
             <if test=" condition.organizationId != null ">
-                t.organization_id = #{condition.organizationId}
+               and
+                <foreach collection="condition.organizationId" index="index" item="item" separator="or">     
+				 	t.organization_id = #{item}
+    			</foreach>
             </if>
             <if test="condition.startTime != null">
                 <![CDATA[
@@ -361,18 +390,22 @@
             and t.createdate <= #{condition.endTime}
         ]]>
             </if>
-        </where>
+       </trim>
         LIMIT #{from}, #{size}
     </select>
      <select id="findUserPageCount" resultType="java.lang.Integer" parameterType="PageInfo">
         select count(*) count
         from user t
-        <where>
+      	<trim prefix="WHERE" prefixOverrides="AND|OR ">
             <if test=" condition.name != null and condition.name != '' ">
                 t.name = #{condition.name}
             </if>
+				and t.usertype = "1"
             <if test=" condition.organizationId != null ">
-                t.organization_id = #{condition.organizationId}
+           		 and
+               <foreach collection="condition.organizationId" index="index" item="item" separator="or">     
+				 	t.organization_id = #{item}
+    			</foreach>
             </if>
             <if test="condition.startTime != null">
                 <![CDATA[
@@ -384,7 +417,7 @@
             and t.createdate <= #{condition.endTime}
             ]]>
             </if>
-        </where>
+        </trim>
     </select>
      <update id="updateUserPwdById">
     update user
@@ -395,19 +428,32 @@
   <select id="findUserVoById" resultMap="userVoResultMap" parameterType="java.lang.Long">
         SELECT
         t.id,
-        loginname,
-        t.`name`,
-        `password`,
-        sex,
-        age,
-        usertype,
-        t.`status`,
-        organization_id,
+        t.loginname,
+        t.name,
+        t.password,
+        t.sex,
+        t.age,
+        t.usertype,
+        t.status,
+        t.organization_id,
         t.createdate,
-        phone,
-        s.`name` AS organizationName,
+        t.phone,
+        
+        t.school, 
+        t.profession, 
+        t.interest, 
+        t.place, 
+        t.height, 
+        t.nation, 
+        t.birthday, 
+        t.remark, 
+        t.photo, 
+    	t.academy, 
+    	t.grade,
+    	
+        s.name AS organizationName,
         o.id AS roleId,
-        o.`name` AS roleName
+        o.name AS roleName
         FROM
         user t
         LEFT JOIN user_role r ON t.id = r.user_id

@@ -1,8 +1,9 @@
 package com.jlc.shiro;
 
-import com.jlc.bean.User;
+import com.jlc.commons.result.UserVo;
 import com.jlc.service.RoleService;
 import com.jlc.service.UserService;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -40,13 +41,19 @@ public class ShiroDbRealm extends AuthorizingRealm {
             AuthenticationToken authcToken) throws AuthenticationException {
         LOGGER.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        User user = userService.findUserByLoginName(token.getUsername());
+        UserVo user  = null ;
+		try {
+			user = userService.findUserByLoginName(token.getUsername());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         // 账号不存在
         if (user == null) {
             return null;
         }
         // 账号未启用
-        if (user.getStatus() == 1) {
+        if ("1".equals(user.getStatus())) {
             return null;
         }
         List<Long> roleList = roleService.findRoleIdListByUserId(user.getId());

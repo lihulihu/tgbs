@@ -4,10 +4,11 @@ import com.jlc.dao.ResourceMapper;
 import com.jlc.dao.RoleMapper;
 import com.jlc.dao.UserRoleMapper;
 import com.jlc.bean.Resource;
-import com.jlc.bean.User;
 import com.jlc.service.ResourceService;
 import com.jlc.commons.utils.Config;
 import com.jlc.commons.result.Tree;
+import com.jlc.commons.result.UserVo;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Autowired
     private RoleMapper roleMapper;
 
-    public List<Tree> findTree(User user) {
+    public List<Tree> findTree(UserVo user) {
         List<Tree> trees = new ArrayList<Tree>();
         // 超级管理
         if (user.getLoginname().equals("admin")) {

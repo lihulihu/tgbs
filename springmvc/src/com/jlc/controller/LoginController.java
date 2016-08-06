@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.jlc.bean.User;
 import com.jlc.bean.tree;
 import com.jlc.commons.base.BaseController;
+import com.jlc.commons.result.UserVo;
 import com.jlc.service.TreeService;
 import com.jlc.service.UserService;
 import com.jlc.shiro.ShiroUser;
@@ -62,7 +62,13 @@ public class LoginController extends BaseController {
     	Subject subject = SecurityUtils.getSubject();
     	ShiroUser user = (ShiroUser) subject.getPrincipal();
     	String name = user.getName();
-    	User userMessage = userService.findUserByLoginName(name);
+    	UserVo userMessage = null;
+		try {
+			userMessage = userService.findUserByLoginName(name);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	Session session = subject.getSession();
     	session.setAttribute("user",userMessage);
     	String type = userMessage.getUsertype().toString();

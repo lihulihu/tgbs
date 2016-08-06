@@ -2,11 +2,11 @@ package com.jlc.service.impl;
 
 import com.jlc.dao.UserMapper;
 import com.jlc.dao.UserRoleMapper;
-import com.jlc.bean.User;
 import com.jlc.bean.UserRole;
 import com.jlc.service.UserService;
 import com.jlc.commons.utils.PageInfo;
 import com.jlc.commons.result.UserVo;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,30 +24,24 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRoleMapper userRoleMapper;
 
-    public User findUserByLoginName(String username) {
+    public UserVo findUserByLoginName(String username) throws Exception{
         return userMapper.findUserByLoginName(username);
     }
 
-    public User findUserById(Long id) {
+    public UserVo findUserById(Long id) {
         return userMapper.findUserById(id);
     }
 
-    public void findDataGrid(PageInfo pageInfo) {
+    public void findDataGrid(PageInfo pageInfo) throws Exception{
         pageInfo.setRows(userMapper.findUserPageCondition(pageInfo));
         pageInfo.setTotal(userMapper.findUserPageCount(pageInfo));
     }
 
-    public void addUser(UserVo userVo) {
-        User user = new User();
-        try {
-           // PropertyUtils.copyProperties(user, userVo);
-        } catch (Exception e) {
-            LOGGER.error("类转换异常：{}", e);
-            throw new RuntimeException("类型转换异常：{}", e);
-        }
-        userMapper.insert(user);
+    public void addUser(UserVo userVo) throws Exception{
+        
+        userMapper.insert(userVo);
 
-        Long id = user.getId();
+       /* Long id = userVo.getId();
         String[] roles = userVo.getRoleIds().split(",");
         UserRole userRole = new UserRole();
 
@@ -55,26 +49,20 @@ public class UserServiceImpl implements UserService {
             userRole.setUserId(id);
             userRole.setRoleId(Long.valueOf(string));
             userRoleMapper.insert(userRole);
-        }
+        }*/
     }
 
-    public void updateUserPwdById(Long userId, String pwd) {
+    public void updateUserPwdById(Long userId, String pwd) throws Exception{
         userMapper.updateUserPwdById(userId, pwd);
     }
 
-    public UserVo findUserVoById(Long id) {
+    public UserVo findUserVoById(Long id) throws Exception{
         return userMapper.findUserVoById(id);
     }
 
-    public void updateUser(UserVo userVo) {
-        User user = new User();
-        try {
-            //PropertyUtils.copyProperties(user, userVo);
-        } catch (Exception e) {
-            LOGGER.error("类转换异常：{}", e);
-            throw new RuntimeException("类型转换异常：{}", e);
-        }
-        userMapper.updateByPrimaryKey(user);
+    public void updateUser(UserVo userVo) throws Exception{
+       
+        userMapper.updateByPrimaryKeySelective(userVo);
         Long id = userVo.getId();
         List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
         if (userRoles != null && (!userRoles.isEmpty())) {
@@ -93,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Long id) throws Exception{
         userMapper.deleteByPrimaryKey(id);
         List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
         if (userRoles != null && (!userRoles.isEmpty())) {

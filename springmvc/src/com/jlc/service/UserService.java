@@ -1,6 +1,5 @@
 package com.jlc.service;
 
-import com.jlc.bean.User;
 import com.jlc.commons.utils.PageInfo;
 import com.jlc.commons.result.UserVo;
 
@@ -16,7 +15,7 @@ public interface UserService {
      * @param username
      * @return
      */
-    User findUserByLoginName(String username);
+    UserVo findUserByLoginName(String username) throws Exception;
 
     /**
      * 根据用户id查询用户
@@ -24,21 +23,21 @@ public interface UserService {
      * @param id
      * @return
      */
-    User findUserById(Long id);
+    UserVo findUserById(Long id) throws Exception;
 
     /**
      * 用户列表
      *
      * @param pageInfo
      */
-    void findDataGrid(PageInfo pageInfo);
+    void findDataGrid(PageInfo pageInfo) throws Exception;
 
     /**
      * 添加用户
      *
      * @param userVo
      */
-    void addUser(UserVo userVo);
+    void addUser(UserVo userVo) throws Exception;
 
     /**
      * 修改密码
@@ -46,7 +45,7 @@ public interface UserService {
      * @param userId
      * @param pwd
      */
-    void updateUserPwdById(Long userId, String pwd);
+    void updateUserPwdById(Long userId, String pwd) throws Exception;
 
     /**
      * 根据用户id查询用户带部门
@@ -54,20 +53,20 @@ public interface UserService {
      * @param id
      * @return
      */
-    UserVo findUserVoById(Long id);
+    UserVo findUserVoById(Long id) throws Exception;
 
     /**
      * 修改用户
      *
      * @param userVo
      */
-    void updateUser(UserVo userVo);
+    void updateUser(UserVo userVo) throws Exception;
 
     /**
      * 删除用户
      *
      * @param id
      */
-    void deleteUserById(Long id);
+    void deleteUserById(Long id) throws Exception;
 
 }

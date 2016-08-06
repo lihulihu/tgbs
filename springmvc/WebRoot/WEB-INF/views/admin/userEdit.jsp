@@ -11,6 +11,14 @@
             value : '${user.organizationId}'
         });
 
+ 		$('#grade').combobox({
+            url : '${path }/publicParam/grade',          
+            valueField:'publicValueId',
+			textField:'publicValueName',
+			lines : true,
+            value : '${user.grade}'
+        });
+
         $('#roleIds').combotree({
             url : '${path }/role/tree',
             parentField : 'pid',
@@ -52,7 +60,7 @@
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
         <form id="userEditForm" method="post">
             <div class="light-info" style="overflow: hidden;padding: 3px;">
-                <div>密码不修改请留空。</div>
+                <div>你只能修改主要信息</div>
             </div>
             <table class="grid">
                 <tr>
@@ -64,7 +72,7 @@
                 </tr>
                 <tr>
                     <td>密码</td>
-                    <td><input type="text" name="password"/></td>
+                    <td><input type="text" name="password" placeholder="不更改不填"/></td>
                     <td>性别</td>
                     <td><select name="sex" id="sex"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">男</option>
@@ -72,8 +80,8 @@
                     </select></td>
                 </tr>
                 <tr>
-                    <td>年龄</td>
-                    <td><input type="text" name="age" value="${user.age}" class="easyui-numberbox"/></td>
+                    <td>毕业学校</td>
+                    <td><input type="text" name="school" value="${user.school}" class="easyui-validatebox" data-options="required:true"/></td>
                     <td>用户类型</td>
                     <td><select id="usertype" name="usertype"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">管理员</option>
@@ -81,15 +89,15 @@
                     </select></td>
                 </tr>
                 <tr>
-                    <td>部门</td>
+                    <td>专业</td>
                     <td><select id="organizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
                     <td>角色</td>
                     <td><input  id="roleIds" name="roleIds" style="width: 140px; height: 29px;"/></td>
                 </tr>
                 <tr>
-                    <td>电话</td>
+                    <td>年级</td>
                     <td>
-                        <input type="text" name="phone" class="easyui-numberbox" value="${user.phone}"/>
+                        <input id="grade" name="grade" style="width: 140px; height: 29px;"/>
                     </td>
                     <td>用户类型</td>
                     <td><select id="state" name="status" value="${user.status}" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">

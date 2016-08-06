@@ -1,10 +1,11 @@
 package com.jlc.commons.base;
 
 import com.jlc.commons.result.Result;
-import com.jlc.bean.User;
+import com.jlc.commons.result.UserVo;
 import com.jlc.service.UserService;
 import com.jlc.shiro.ShiroUser;
 import com.jlc.commons.utils.StringEscapeEditor;
+
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,9 +45,15 @@ public abstract class BaseController {
      * 获取当前登录用户对象
      * @return
      */
-    public User getCurrentUser() {
+    public UserVo getCurrentUser() {
         ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        User currentUser = userService.findUserById(user.id);
+        UserVo currentUser = null;
+		try {
+			currentUser = userService.findUserById(user.id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return currentUser;
     }
 

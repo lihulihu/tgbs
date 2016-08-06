@@ -4,6 +4,7 @@ import com.jlc.commons.result.Tree;
 import com.jlc.dao.OrganizationMapper;
 import com.jlc.bean.Organization;
 import com.jlc.service.OrganizationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +75,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     public void deleteOrganizationById(Long id) {
         organizationMapper.deleteOrganizationById(id);
     }
-
+    @Override
+    public List<Organization> findOrganizationAllByPid(Long pid){
+    	return organizationMapper.findOrganizationAllByPid(pid);
+    }
 }

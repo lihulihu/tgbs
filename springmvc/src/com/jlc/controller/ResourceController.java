@@ -1,9 +1,10 @@
 package com.jlc.controller;
 
 import com.jlc.commons.base.BaseController;
+import com.jlc.commons.result.UserVo;
 import com.jlc.bean.Resource;
-import com.jlc.bean.User;
 import com.jlc.service.ResourceService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class ResourceController extends BaseController {
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
     public Object tree() {
-        User currentUser = getCurrentUser();
+        UserVo currentUser = getCurrentUser();
         return resourceService.findTree(currentUser);
     }
 

@@ -49,7 +49,7 @@
         <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
 
-        <table schema="shiro" tableName="user" domainObjectName="User"
+        <table schema="shiro" tableName="publicParam" domainObjectName="PublicParam"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableUpdateByExample="false"
@@ -77,3 +77,4 @@
 
         <!-- 参考链接：http://blog.csdn.net/gufeng672/article/details/27196347 -->
 
+<!-- java -jar WebRoot/WEB-INF/lib/mybatis-generator-core-1.3.2.jar -configfile src/generatorConfig.xml -overwrite -->

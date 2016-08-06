@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlc.dao.PublicParamMapper">
+  <resultMap id="BaseResultMap" type="com.jlc.bean.PublicParam">
+    <id column="public_id" jdbcType="INTEGER" property="publicId" />
+    <result column="public_code" jdbcType="VARCHAR" property="publicCode" />
+    <result column="public_value_id" jdbcType="VARCHAR" property="publicValueId" />
+    <result column="public_value_name" jdbcType="VARCHAR" property="publicValueName" />
+    <result column="public_name" jdbcType="VARCHAR" property="publicName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    public_id, public_code, public_value_id, public_value_name, public_name, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from publicparam
+    where public_id = #{publicId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByParam" parameterType="HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from publicparam
+    <trim prefix="WHERE" prefixOverrides="AND|OR ">
+    <if test = "publicCode != null and publicCode != ''">
+    	public_code = #{publicCode}
+    </if>
+    <if test = "publicId != null and publicId != ''">
+    	public_id = #{publicId}
+    </if>
+	<if test = "publicValueId != null and publicValueId != ''">
+    	public_value_id = #{publicValueId}
+    </if>
+    </trim>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from publicparam
+    where public_id = #{publicId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlc.bean.PublicParam">
+    insert into publicparam (public_id, public_code, public_value_id, 
+      public_value_name, public_name, status
+      )
+    values (#{publicId,jdbcType=INTEGER}, #{publicCode,jdbcType=VARCHAR}, #{publicValueId,jdbcType=VARCHAR}, 
+      #{publicValueName,jdbcType=VARCHAR}, #{publicName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlc.bean.PublicParam">
+    insert into publicparam
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="publicId != null">
+        public_id,
+      </if>
+      <if test="publicCode != null">
+        public_code,
+      </if>
+      <if test="publicValueId != null">
+        public_value_id,
+      </if>
+      <if test="publicValueName != null">
+        public_value_name,
+      </if>
+      <if test="publicName != null">
+        public_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="publicId != null">
+        #{publicId,jdbcType=INTEGER},
+      </if>
+      <if test="publicCode != null">
+        #{publicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="publicValueId != null">
+        #{publicValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="publicValueName != null">
+        #{publicValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicName != null">
+        #{publicName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.bean.PublicParam">
+    update publicparam
+    <set>
+      <if test="publicCode != null">
+        public_code = #{publicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="publicValueId != null">
+        public_value_id = #{publicValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="publicValueName != null">
+        public_value_name = #{publicValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicName != null">
+        public_name = #{publicName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where public_id = #{publicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlc.bean.PublicParam">
+    update publicparam
+    set public_code = #{publicCode,jdbcType=VARCHAR},
+      public_value_id = #{publicValueId,jdbcType=VARCHAR},
+      public_value_name = #{publicValueName,jdbcType=VARCHAR},
+      public_name = #{publicName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where public_id = #{publicId,jdbcType=INTEGER}
+  </update>
+</mapper>

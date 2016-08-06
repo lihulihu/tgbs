@@ -53,5 +53,7 @@ public interface OrganizationService {
      * @param id
      */
     void deleteOrganizationById(Long id);
+    
+    List<Organization> findOrganizationAllByPid(Long pid);
 
 }

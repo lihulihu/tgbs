@@ -21,13 +21,13 @@ public class UserVo implements Serializable {
 
     private String password;
 
-    private Integer sex;
+    private String sex;
 
-    private Integer age;
+    private String age;
 
-    private Integer usertype;
+    private String usertype;
 
-    private Integer status;
+    private String status;
 
     private Integer organizationId;
 
@@ -35,6 +35,34 @@ public class UserVo implements Serializable {
     private Date createdate;
 
     private String phone;
+    
+    
+    
+    //新加 start
+    private String school;
+
+    private String profession;
+
+    private String interest;
+
+    private String place;
+
+    private String height;
+
+    private String nation;
+
+    private Date birthday;
+
+    private String remark;
+
+    private String photo;
+
+    private String academy;
+
+    private String grade;
+    
+    //新加end
+    
 
     private List<Role> rolesList;
 
@@ -79,39 +107,41 @@ public class UserVo implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getSex() {
-        return sex;
-    }
+    
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
+    public String getSex() {
+		return sex;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public String getAge() {
+		return age;
+	}
 
-    public Integer getUsertype() {
-        return usertype;
-    }
+	public void setAge(String age) {
+		this.age = age;
+	}
 
-    public void setUsertype(Integer usertype) {
-        this.usertype = usertype;
-    }
+	public String getUsertype() {
+		return usertype;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public Integer getOrganizationId() {
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getOrganizationId() {
         return organizationId;
     }
 
@@ -174,4 +204,93 @@ public class UserVo implements Serializable {
     public void setCreatedateEnd(Date createdateEnd) {
         this.createdateEnd = createdateEnd;
     }
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getProfession() {
+		return profession;
+	}
+
+	public void setProfession(String profession) {
+		this.profession = profession;
+	}
+
+	public String getInterest() {
+		return interest;
+	}
+
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getNation() {
+		return nation;
+	}
+
+	public void setNation(String nation) {
+		this.nation = nation;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getAcademy() {
+		return academy;
+	}
+
+	public void setAcademy(String academy) {
+		this.academy = academy;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+    
 }

@@ -3,9 +3,11 @@ package com.jlc.controller;
 import com.jlc.commons.base.BaseController;
 import com.jlc.commons.result.UserVo;
 import com.jlc.commons.utils.PageInfo;
+import com.jlc.bean.Organization;
 import com.jlc.bean.Role;
-import com.jlc.bean.User;
+import com.jlc.service.OrganizationService;
 import com.jlc.service.UserService;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,8 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrganizationService organizationService;
     /**
      * 用户管理页
      *
@@ -49,7 +53,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/student/message", method = RequestMethod.GET)
     public String studentMessage() {
-        return "student/studentMessage";
+        return "admin/studentMessage";
     }
 
     /**
@@ -72,7 +76,19 @@ public class UserController extends BaseController {
             condition.put("name", userVo.getName());
         }
         if (userVo.getOrganizationId() != null) {
-            condition.put("organizationId", userVo.getOrganizationId());
+        	Organization organization = organizationService.findOrganizationById(userVo.getOrganizationId().longValue());
+        	List<Long> list = new ArrayList<>();
+        	if(organization != null && organization.getPid() == null){
+        		List<Organization> organizationList = organizationService.findOrganizationAllByPid(userVo.getOrganizationId().longValue());
+        		for(int i = 0; i < organizationList.size(); i++){
+        			list.add(organizationList.get(i).getId());
+        		}
+        	}
+        	else{
+        		list.add(userVo.getOrganizationId().longValue());
+        	}
+        		
+            condition.put("organizationId", list);
         }
         if (userVo.getCreatedateStart() != null) {
             condition.put("startTime", userVo.getCreatedateStart());
@@ -81,7 +97,12 @@ public class UserController extends BaseController {
             condition.put("endTime", userVo.getCreatedateEnd());
         }
         pageInfo.setCondition(condition);
-        userService.findDataGrid(pageInfo);
+        try {
+			userService.findDataGrid(pageInfo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return pageInfo;
     }
 
@@ -104,15 +125,52 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Object add(UserVo userVo) {
-        User u = userService.findUserByLoginName(userVo.getLoginname());
+        UserVo u = null;
+		try {
+			u = userService.findUserByLoginName(userVo.getLoginname());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         if (u != null) {
             return renderError("用户名已存在!");
         }
         userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-        userService.addUser(userVo);
+        try {
+			userService.addUser(userVo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return renderSuccess("添加成功");
     }
 
+    
+    /**
+     * 查看用户页
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("/lookPage")
+    public String lookPage(Long id, Model model) {
+        UserVo userVo = null;
+		try {
+			userVo = userService.findUserVoById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        List<Role> rolesList = userVo.getRolesList();
+        List<Long> ids = new ArrayList<Long>();
+        for (Role role : rolesList) {
+            ids.add(role.getId());
+        }
+        model.addAttribute("roleIds", ids);
+        model.addAttribute("user", userVo);
+        return "admin/message";
+    }
     /**
      * 编辑用户页
      *
@@ -122,7 +180,13 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(Long id, Model model) {
-        UserVo userVo = userService.findUserVoById(id);
+        UserVo userVo = null;
+		try {
+			userVo = userService.findUserVoById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         List<Role> rolesList = userVo.getRolesList();
         List<Long> ids = new ArrayList<Long>();
         for (Role role : rolesList) {
@@ -142,12 +206,23 @@ public class UserController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(UserVo userVo) {
-        User user = userService.findUserByLoginName(userVo.getLoginname());
+        UserVo user = null;
+		try {
+			user = userService.findUserByLoginName(userVo.getLoginname());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         if (user != null && user.getId() != userVo.getId()) {
             return renderError("用户名已存在!");
         }
         userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-        userService.updateUser(userVo);
+        try {
+			userService.updateUser(userVo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return renderSuccess("修改成功！");
     }
 
@@ -175,7 +250,12 @@ public class UserController extends BaseController {
             return renderError("老密码不正确!");
         }
 
-        userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
+        try {
+			userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return renderSuccess("密码修改成功！");
     }
 
@@ -188,7 +268,12 @@ public class UserController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        userService.deleteUserById(id);
+        try {
+			userService.deleteUserById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return renderSuccess("删除成功！");
     }
 }

@@ -1,8 +1,8 @@
 package com.jlc.service;
 
 import com.jlc.bean.Resource;
-import com.jlc.bean.User;
 import com.jlc.commons.result.Tree;
+import com.jlc.commons.result.UserVo;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface ResourceService {
      * @param currentUser
      * @return
      */
-    List<Tree> findTree(User currentUser);
+    List<Tree> findTree(UserVo currentUser);
 
     /**
      * 查询所有资源

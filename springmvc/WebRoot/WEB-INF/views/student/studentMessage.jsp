@@ -55,12 +55,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 sortable : true
             },{
                 width : '80',
-                title : '部门ID',
+                title : '专业ID',
                 field : 'organizationId',
                 hidden : true
             },{
-                width : '80',
-                title : '所属部门',
+                width : '100',
+                title : '专业',
                 field : 'organizationName'
             },{
                 width : '130s',
@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 sortable : true
             }, 
             {
-                width : '200',
+                width : '70',
                 title : '角色',
                 field : 'rolesList',
                 sortable : true,
@@ -132,22 +132,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             } , {
                 field : 'action',
                 title : '操作',
-                width : 130,
+                width : 200,
                 formatter : function(value, row, index) {
                     var str = '';
-                        <shiro:hasPermission name="/user/edit">
+                        
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
-                        </shiro:hasPermission>
-                        <shiro:hasPermission name="/user/delete">
+                       
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
-                        </shiro:hasPermission>
+                        
+                            str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-look" data-options="plain:true,iconCls:\'icon-search\'" onclick="lookFun(\'{0}\');" >详细</a>', row.id);
+                        
                     return str;
                 }
             }] ],
             onLoadSuccess:function(data){
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
                 $('.user-easyui-linkbutton-del').linkbutton({text:'删除',plain:true,iconCls:'icon-del'});
+                $('.user-easyui-linkbutton-look').linkbutton({text:'查看',plain:true,iconCls:'icon-search'});
             },
             toolbar : '#toolbar'
         });
@@ -236,7 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
  
 <body class="easyui-layout" data-options="fit:true,border:false">
-    <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
+    <div data-options="region:'north',border:false,split:true" style="height: 30px; overflow: hidden;background-color: #fff">
         <form id="searchForm">
             <table>
                 <tr>
@@ -254,7 +257,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div data-options="region:'center',border:true,title:'用户列表'" >
         <table id="dataGrid" data-options="fit:true,border:false"></table>
     </div>
-    <div data-options="region:'west',border:true,split:false,title:'组织机构'"  style="width:150px;overflow: hidden; ">
+    <div data-options="region:'west',border:true,split:true,title:'组织机构'"  style="width:150px;overflow: hidden; ">
         <ul id="organizationTree"  style="width:160px;margin: 10px 10px 10px 10px">
         </ul>
     </div>

@@ -10,6 +10,13 @@
             panelHeight : 'auto'
         });
 
+		$('#grade').combobox({
+            url : '${path }/publicParam/grade',          
+            valueField:'publicValueId',
+			textField:'publicValueName',
+			lines : true,
+            value : '${user.grade}'
+        });
         $('#roleIds').combotree({
             url: '${path }/role/tree',
             multiple: true,
@@ -63,8 +70,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>年龄</td>
-                    <td><input type="text" name="age" class="easyui-numberbox"/></td>
+                     <td>毕业学校</td>
+                    <td><input type="text" name="school" value="${user.school}" class="easyui-validatebox" data-options="required:true"/></td>
                     <td>用户类型</td>
                     <td>
                         <select name="usertype" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
@@ -80,9 +87,9 @@
                     <td><select id="roleIds" name="roleIds" style="width: 140px; height: 29px;"></select></td>
                 </tr>
                 <tr>
-                    <td>电话</td>
+                    <td>年级</td>
                     <td>
-                        <input type="text" name="phone" class="easyui-numberbox"/>
+                        <input id="grade" name="grade" style="width: 140px; height: 29px;"/>
                     </td>
                     <td>用户状态</td>
                     <td>
