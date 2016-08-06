@@ -26,7 +26,7 @@
         <!-- 登陆成功后跳转的url -->
         <property name="successUrl" value="/index"/>
         <!-- 没有权限跳转的url -->
-        <property name="unauthorizedUrl" value="/unauth"/>
+        <property name="unauthorizedUrl" value="/404"/>
         <property name="filterChainDefinitions">
             <value>
                 /commons/** = anon <!-- 不需要认证 -->

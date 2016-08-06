@@ -118,14 +118,21 @@
                     <c:forEach var="list" items="${resource}">
 						
 						<div class="nav-item">
-                       	 <a href="javascript:addTab('${list.getTreeName()}','${path}+${list.getTreeUrl()}','menu_icon_datadeal')">
+                       	 <a href="javascript:addTab('${list.getTreeName()}','${path}/user/student/message','menu_icon_datadeal')">
                             <span class="menu_icon_datadeal"></span>
                             <span>${list.getTreeName()}</span>
                        	 </a>
                    	 </div>
 					</c:forEach>
                 </div>
-
+				<div title="系统管理" selected="true" style="overflow: auto;">
+                    <div class="nav-item">
+                        <a href="javascript:addTab('用户管理','${path}/user/manager','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>用户管理</span>
+                        </a>
+                    </div>
+                    </div>
                 
             </div>
 
@@ -145,7 +152,7 @@
                 </div>
             </div>
         </div>
-        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2015 power by <a href="http://www.dreamlu.net/" target="_blank">如梦技术</a></div>
+        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2016power by <a href="http://www.dreamlu.net/" target="_blank">成都信息工程大学</a></div>
     </div>
 
     <!--[if lte IE 7]>

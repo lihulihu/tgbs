@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
             LOGGER.error("类转换异常：{}", e);
             throw new RuntimeException("类型转换异常：{}", e);
         }
-        userMapper.updateUser(user);
+        userMapper.updateByPrimaryKey(user);
         Long id = userVo.getId();
         List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
         if (userRoles != null && (!userRoles.isEmpty())) {
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void deleteUserById(Long id) {
-        userMapper.deleteById(id);
+        userMapper.deleteByPrimaryKey(id);
         List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
         if (userRoles != null && (!userRoles.isEmpty())) {
             for (UserRole userRole : userRoles) {

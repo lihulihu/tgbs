@@ -43,6 +43,16 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 学生信息管理页
+     *
+     * @return
+     */
+    @RequestMapping(value = "/student/message", method = RequestMethod.GET)
+    public String studentMessage() {
+        return "student/studentMessage";
+    }
+
+    /**
      * 用户管理列表
      *
      * @param userVo

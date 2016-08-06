@@ -1,37 +1,26 @@
 package com.jlc.dao;
 
-import com.jlc.bean.User;
-import com.jlc.commons.utils.PageInfo;
-import com.jlc.commons.result.UserVo;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.jlc.bean.User;
+import com.jlc.commons.result.UserVo;
+import com.jlc.commons.utils.PageInfo;
+
 public interface UserMapper {
-    /**
-     * 删除用户
-     *
-     * @param id
-     * @return
-     */
-    int deleteById(Long id);
+    int deleteByPrimaryKey(Long id);
 
-    /**
-     * 添加用户
-     *
-     * @param user
-     * @return
-     */
-    int insert(User user);
+    int insert(User record);
 
-    /**
-     * 修改用户
-     *
-     * @param user
-     * @return
-     */
-    int updateUser(User user);
+    int insertSelective(User record);
 
+    User selectByPrimaryKey(Long id);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
+    
     /**
      * 根据用户名查询用户
      *
@@ -39,7 +28,6 @@ public interface UserMapper {
      * @return
      */
     User findUserByLoginName(String username);
-
     /**
      * 根据用户id查询用户
      *
@@ -47,7 +35,6 @@ public interface UserMapper {
      * @return
      */
     User findUserById(Long id);
-
     /**
      * 用户列表
      *
@@ -55,7 +42,6 @@ public interface UserMapper {
      * @return
      */
     List findUserPageCondition(PageInfo pageInfo);
-
     /**
      * 统计用户
      *
@@ -63,20 +49,14 @@ public interface UserMapper {
      * @return
      */
     int findUserPageCount(PageInfo pageInfo);
-
-    /**
-     * 修改用户密码
-     *
-     * @param userId
-     * @param pwd
-     */
     void updateUserPwdById(@Param("userId") Long userId, @Param("pwd") String pwd);
-
     /**
      * 根据用户id查询用户带部门
      *
      * @param id
      * @return
      */
+
     UserVo findUserVoById(Long id);
+
 }
