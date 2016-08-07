@@ -14,6 +14,8 @@ public class PublicParam implements Serializable {
     private String publicName;
 
     private String status;
+    
+    private String remark;
 
     private static final long serialVersionUID = 1L;
 
@@ -65,7 +67,16 @@ public class PublicParam implements Serializable {
         this.status = status == null ? null : status.trim();
     }
 
-    @Override
+    
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());

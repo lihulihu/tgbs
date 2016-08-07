@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jlc.bean.PublicParam;
+import com.jlc.commons.utils.PageInfo;
 
 public interface PublicParamService {
     int deleteByPrimaryKey(Integer publicId) throws Exception;
@@ -20,4 +21,6 @@ public interface PublicParamService {
     int updateByPrimaryKey(PublicParam record) throws Exception;
     
     List<PublicParam> selectByParam(Map<String,Object> map) throws Exception;
+    
+    public void selectParamPage(PageInfo pageInfo) throws Exception;
 }

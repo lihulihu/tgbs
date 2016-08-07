@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	</tr>
 	<tr height=50  >
 		<td width=110 align=center bgcolor="#faf4ff">出生年月：</td>
-		<td width=150 align=center>${user.birthday}</td>
+		<td width=150 align=center><fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/></td>
 		<td width=110 align=center bgcolor="#faf4ff">民族：</td>
 		<td width=150 align=center>汉</td>
 	</tr>

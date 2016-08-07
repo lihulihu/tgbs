@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jlc.bean.PublicParam;
+import com.jlc.commons.utils.PageInfo;
 
 public interface PublicParamMapper {
     int deleteByPrimaryKey(Integer publicId) throws Exception;
@@ -20,4 +21,13 @@ public interface PublicParamMapper {
     int updateByPrimaryKey(PublicParam record) throws Exception;
     
     List<PublicParam> selectByParam(Map<String,Object> map) throws Exception;
+    
+    List<PublicParam> findParamPageCondition(PageInfo pageInfo);
+    /**
+     * 统计用户
+     *
+     * @param pageInfo
+     * @return
+     */
+    int findParamPageCount(PageInfo pageInfo);
 }

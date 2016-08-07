@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jlc.bean.PublicParam;
+import com.jlc.commons.utils.PageInfo;
 import com.jlc.dao.PublicParamMapper;
 import com.jlc.service.PublicParamService;
 
@@ -41,5 +42,9 @@ public class PublicParamServiceImpl implements PublicParamService{
     
     public List<PublicParam> selectByParam(Map<String,Object> map) throws Exception{
     	return publicParamMapper.selectByParam(map);
+    }
+    public void selectParamPage(PageInfo pageInfo) throws Exception{
+    	pageInfo.setRows(publicParamMapper.findParamPageCondition(pageInfo));
+        pageInfo.setTotal(publicParamMapper.findParamPageCount(pageInfo));
     }
 }

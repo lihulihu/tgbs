@@ -8,15 +8,50 @@
     <result column="public_value_name" jdbcType="VARCHAR" property="publicValueName" />
     <result column="public_name" jdbcType="VARCHAR" property="publicName" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
-    public_id, public_code, public_value_id, public_value_name, public_name, status
+    public_id, public_code, public_value_id, public_value_name, public_name, status , remark
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from publicparam
     where public_id = #{publicId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="findParamPageCondition" resultMap="BaseResultMap" parameterType="PageInfo">
+  	 select 
+    <include refid="Base_Column_List" />
+    from publicparam
+    <trim prefix="WHERE" prefixOverrides="AND|OR ">
+    <if test = "condition.publicCode != null and condition.publicCode != ''">
+    	and public_code = #{condition.publicCode}
+    </if>
+    <if test = "condition.publicId != null and condition.publicId != ''">
+    	and public_id = #{condition.publicId}
+    </if>
+	<if test = "condition.publicValueId != null and condition.publicValueId != ''">
+    	and public_value_id = #{condition.publicValueId}
+    </if>
+    </trim>
+    LIMIT #{from}, #{size}
+  </select>
+  	
+  <select id="findParamPageCount" resultType="java.lang.Integer" parameterType="PageInfo">
+        select count(*) count
+        from publicparam
+    <trim prefix="WHERE" prefixOverrides="AND|OR ">
+    <if test = "condition.publicCode != null and condition.publicCode != ''">
+    	and public_code = #{condition.publicCode}
+    </if>
+    <if test = "condition.publicId != null and condition.publicId != ''">
+    	and public_id = #{publicId}
+    </if>
+	<if test = "condition.publicValueId != null and condition.publicValueId != ''">
+    	and public_value_id = #{condition.publicValueId}
+    </if>
+    </trim>
   </select>
   
   <select id="selectByParam" parameterType="HashMap" resultMap="BaseResultMap">
@@ -42,10 +77,10 @@
   </delete>
   <insert id="insert" parameterType="com.jlc.bean.PublicParam">
     insert into publicparam (public_id, public_code, public_value_id, 
-      public_value_name, public_name, status
+      public_value_name, public_name, status, remark
       )
     values (#{publicId,jdbcType=INTEGER}, #{publicCode,jdbcType=VARCHAR}, #{publicValueId,jdbcType=VARCHAR}, 
-      #{publicValueName,jdbcType=VARCHAR}, #{publicName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      #{publicValueName,jdbcType=VARCHAR}, #{publicName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jlc.bean.PublicParam">
@@ -69,6 +104,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="remark != null">
+        remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="publicId != null">
@@ -88,6 +126,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -109,6 +150,9 @@
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
     </set>
     where public_id = #{publicId,jdbcType=INTEGER}
   </update>
@@ -118,7 +162,8 @@
       public_value_id = #{publicValueId,jdbcType=VARCHAR},
       public_value_name = #{publicValueName,jdbcType=VARCHAR},
       public_name = #{publicName,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR}
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
     where public_id = #{publicId,jdbcType=INTEGER}
   </update>
 </mapper>
