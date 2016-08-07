@@ -50,7 +50,8 @@ public class UserVo implements Serializable {
     private String height;
 
     private String nation;
-
+    
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date birthday;
 
     private String remark;
@@ -61,12 +62,22 @@ public class UserVo implements Serializable {
 
     private String grade;
     
+    private String address;
+    
+    private String email;
+    
+    private String experience;
+    
+    private String hope;
+    
     //新加end
     
 
     private List<Role> rolesList;
 
     private String organizationName;
+    
+    private String gradeName;
 
     private String roleIds;
 
@@ -291,6 +302,46 @@ public class UserVo implements Serializable {
 
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getExperience() {
+		return experience;
+	}
+
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+
+	public String getHope() {
+		return hope;
+	}
+
+	public void setHope(String hope) {
+		this.hope = hope;
+	}
+
+	public String getGradeName() {
+		return gradeName;
+	}
+
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
 	}
     
 }

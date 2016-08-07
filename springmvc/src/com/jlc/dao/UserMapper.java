@@ -12,13 +12,12 @@ public interface UserMapper {
 
     int insert(UserVo record) throws Exception;
 
-    int insertSelective(UserVo record) throws Exception;
 
     UserVo selectByPrimaryKey(Long id) throws Exception;
 
     int updateByPrimaryKeySelective(UserVo record) throws Exception;
 
-    int updateByPrimaryKey(UserVo record) throws Exception;
+  
     
     /**
      * 根据用户名查询用户

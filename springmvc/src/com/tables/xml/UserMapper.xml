@@ -24,6 +24,14 @@
     <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="academy" jdbcType="VARCHAR" property="academy" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
+    
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="experience" jdbcType="VARCHAR" property="experience" />
+    <result column="hope" jdbcType="VARCHAR" property="hope" />
+    
+    
+    
   </resultMap>
   <resultMap id="userVoResultMap" type="com.jlc.commons.result.UserVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
@@ -49,9 +57,14 @@
         <result column="photo" jdbcType="VARCHAR" property="photo" />
         <result column="academy" jdbcType="VARCHAR" property="academy" />
         <result column="grade" jdbcType="VARCHAR" property="grade" />
+        
+        <result column="address" jdbcType="VARCHAR" property="address" />
+    	<result column="email" jdbcType="VARCHAR" property="email" />
+   	 	<result column="experience" jdbcType="VARCHAR" property="experience" />
+    	<result column="hope" jdbcType="VARCHAR" property="hope" />
 
         <result column="organizationName" property="organizationName" jdbcType="VARCHAR"/>
-
+		<result column="gradeName" property="gradeName" jdbcType="VARCHAR"/>
         <collection property="rolesList" ofType="Role">
             <id column="roleId" property="id"/>
             <result column="roleName" property="name"/>
@@ -60,7 +73,7 @@
   <sql id="Base_Column_List">
     id, loginname, name, password, sex, age, usertype, status, organization_id, createdate, 
     phone, school, profession, interest, place, height, nation, birthday, remark, photo, 
-    academy, grade
+    academy, grade ,address,email,experience,hope
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -82,7 +95,9 @@
       phone, school, profession, 
       interest, place, height, 
       nation, birthday, remark, 
-      photo, academy, grade
+      photo, academy, grade,
+      address,email,experience,
+      hope
       )
     values (#{loginname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{usertype,jdbcType=VARCHAR}, 
@@ -90,145 +105,12 @@
       #{phone,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
       #{interest,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
       #{nation,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR}, #{academy,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}
+      #{photo,jdbcType=VARCHAR}, #{academy,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR},
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{experience,jdbcType=VARCHAR},
+      #{hope,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jlc.commons.result.UserVo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="loginname != null">
-        loginname,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="usertype != null">
-        usertype,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="organizationId != null">
-        organization_id,
-      </if>
-      <if test="createdate != null">
-        createdate,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="school != null">
-        school,
-      </if>
-      <if test="profession != null">
-        profession,
-      </if>
-      <if test="interest != null">
-        interest,
-      </if>
-      <if test="place != null">
-        place,
-      </if>
-      <if test="height != null">
-        height,
-      </if>
-      <if test="nation != null">
-        nation,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="photo != null">
-        photo,
-      </if>
-      <if test="academy != null">
-        academy,
-      </if>
-      <if test="grade != null">
-        grade,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="loginname != null">
-        #{loginname,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=VARCHAR},
-      </if>
-      <if test="usertype != null">
-        #{usertype,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="organizationId != null">
-        #{organizationId,jdbcType=INTEGER},
-      </if>
-      <if test="createdate != null">
-        #{createdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="school != null">
-        #{school,jdbcType=VARCHAR},
-      </if>
-      <if test="profession != null">
-        #{profession,jdbcType=VARCHAR},
-      </if>
-      <if test="interest != null">
-        #{interest,jdbcType=VARCHAR},
-      </if>
-      <if test="place != null">
-        #{place,jdbcType=VARCHAR},
-      </if>
-      <if test="height != null">
-        #{height,jdbcType=VARCHAR},
-      </if>
-      <if test="nation != null">
-        #{nation,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="academy != null">
-        #{academy,jdbcType=VARCHAR},
-      </if>
-      <if test="grade != null">
-        #{grade,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.jlc.commons.result.UserVo">
     update user
     <set>
@@ -295,34 +177,23 @@
       <if test="grade != null">
         grade = #{grade,jdbcType=VARCHAR},
       </if>
+      
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR}, 
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="hope != null">
+        hope = #{hope,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jlc.commons.result.UserVo">
-    update user
-    set loginname = #{loginname,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      age = #{age,jdbcType=VARCHAR},
-      usertype = #{usertype,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      organization_id = #{organizationId,jdbcType=INTEGER},
-      createdate = #{createdate,jdbcType=TIMESTAMP},
-      phone = #{phone,jdbcType=VARCHAR},
-      school = #{school,jdbcType=VARCHAR},
-      profession = #{profession,jdbcType=VARCHAR},
-      interest = #{interest,jdbcType=VARCHAR},
-      place = #{place,jdbcType=VARCHAR},
-      height = #{height,jdbcType=VARCHAR},
-      nation = #{nation,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      remark = #{remark,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      academy = #{academy,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+  
    <select id="findUserByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -360,8 +231,13 @@
         t.photo, 
     	t.academy, 
     	t.grade,
+    	t.address,
+    	t.email,
+    	t.experience,
+      	t.hope,
         
         s.name AS organizationName,
+        p.public_value_name AS gradeName,
         o.id AS roleId,
         o.name AS roleName
         FROM
@@ -369,6 +245,7 @@
         LEFT JOIN user_role r ON t.id = r.user_id
         LEFT JOIN role o ON r.role_id = o.id
         LEFT JOIN organization s ON s.id = t.organization_id
+        LEFT JOIN publicparam p ON p.public_code="grade" and p.public_value_id = t.grade
         <trim prefix="WHERE" prefixOverrides="AND|OR ">
             <if test=" condition.name != null and condition.name != '' ">
                 t.name = #{condition.name}
@@ -450,8 +327,13 @@
         t.photo, 
     	t.academy, 
     	t.grade,
-    	
+    	t.address,
+    	t.email,
+    	t.experience,
+      	t.hope,
+        
         s.name AS organizationName,
+        p.public_value_name AS gradeName,
         o.id AS roleId,
         o.name AS roleName
         FROM
@@ -459,6 +341,7 @@
         LEFT JOIN user_role r ON t.id = r.user_id
         LEFT JOIN role o ON r.role_id = o.id
         LEFT JOIN organization s ON s.id = t.organization_id
+        LEFT JOIN publicparam p ON p.public_code="grade" and p.public_value_id = t.grade
         <where>
             t.id = #{id}
         </where>
