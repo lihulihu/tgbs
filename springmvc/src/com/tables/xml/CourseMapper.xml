@@ -20,14 +20,22 @@
   </select>
    	
    <select id="findCoursePageCondition" resultMap="BaseResultMap" parameterType="PageInfo">
-  	 select 
-    <include refid="Base_Column_List" />
-    from course
-    <!-- <trim prefix="WHERE" prefixOverrides="AND|OR ">
-    <if test = "condition.id != null and condition.id != ''">
-    	and course_id = #{condition.id}
-    </if>
-    </trim> -->
+  	 select c.course_name,
+  	 c.course_Desc,
+  	 course_Capacity,
+  	 c.organization_id,
+  	 c.course_grade,
+  	 s.name AS organizationName 
+    from course c
+    LEFT JOIN organization s ON s.id = c.organization_id
+    <trim prefix="WHERE" prefixOverrides="AND|OR ">
+            <if test=" condition.organizationId != null ">
+               and
+                <foreach collection="condition.organizationId" index="index" item="item" separator="or">     
+				 	t.organization_id = #{item}
+    			</foreach>
+            </if>
+       </trim>
     LIMIT #{from}, #{size}
   </select>	
    
