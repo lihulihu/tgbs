@@ -8,9 +8,12 @@
     <result column="course_Capacity" jdbcType="VARCHAR" property="capacity" />
     <result column="organization_id" jdbcType="INTEGER" property="organizationId" />
     <result column="course_Grade" jdbcType="INTEGER" property="grade" />
+    <result column="course_credit" jdbcType="INTEGER" property="credit" />
+    <result column="course_occupied" jdbcType="INTEGER" property="occupied" />
+    <result column="course_class" jdbcType="INTEGER" property="courseclass" />
   </resultMap>
   <sql id="Base_Column_List">
-    course_id, course_name, course_Desc, course_Capacity, organization_id, course_Grade
+    course_id, course_name, course_Desc, course_Capacity, organization_id, course_Grade, course_credit, course_occupied, course_class
   </sql>
   <select id="findCourseById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,10 +25,13 @@
    <select id="findCoursePageCondition" resultMap="BaseResultMap" parameterType="PageInfo">
   	 select c.course_name,
   	 c.course_Desc,
-  	 course_Capacity,
+  	 c.course_Capacity,
   	 c.organization_id,
   	 c.course_grade,
-  	 s.name AS organizationName 
+  	 c.course_credit,
+  	 c.course_occupied,
+  	 c.course_class,
+  	 s.name AS organizationName
     from course c
     LEFT JOIN organization s ON s.id = c.organization_id
     <trim prefix="WHERE" prefixOverrides="AND|OR ">

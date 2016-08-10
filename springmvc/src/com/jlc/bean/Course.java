@@ -23,6 +23,12 @@ public class Course implements Serializable {
 	
 	private long grade;
 	
+	private long credit;
+	
+	private long occupied;
+	
+	private String courseclass;
+	
 	private Integer organizationId;
 	
 	private String organizationName;
@@ -73,6 +79,30 @@ public class Course implements Serializable {
 
 	public void setGrade(long grade) {
 		this.grade = grade;
+	}
+
+	public long getOccupied() {
+		return occupied;
+	}
+
+	public void setOccupied(long occupied) {
+		this.occupied = occupied;
+	}
+
+	public long getCredit() {
+		return credit;
+	}
+
+	public void setCredit(long credit) {
+		this.credit = credit;
+	}
+	
+	public String getCourseclass() {
+		return courseclass;
+	}
+
+	public void setCourseclass(String courseclass) {
+		this.courseclass = courseclass;
 	}
 
 	public Integer getOrganizationId() {

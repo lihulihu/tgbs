@@ -69,6 +69,10 @@
                     <td>
                         <input id="grade" name="grade" style="width: 140px; height: 29px;"/>
                     </td>
+                    <td>学分</td>
+                    <td>
+                        <input id="grade" name="grade" style="width: 140px; height: 29px;"/>
+                    </td>
                 </tr>
             </table>
         </form>

@@ -42,13 +42,25 @@
                 field : 'capacity',
                 hidden : false
             },{
-                width : '80',
+                width : '120',
                 title : '专业',
                 field : 'organizationName'
             },{
                 width : '80',
                 title : '年级',
                 field : 'grade'
+            },{
+                width : '80',
+                title : '学分',
+                field : 'credit'
+            },{
+                width : '80',
+                title : '已选人数',
+                field : 'occupied'
+            },{
+                width : '80',
+                title : '分类',
+                field : 'courseclass'
             }] ],
             onLoadSuccess:function(data){
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
