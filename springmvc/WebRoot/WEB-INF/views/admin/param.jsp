@@ -60,9 +60,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			分类: 
 			<select class="easyui-combobox" panelHeight="auto" style="width:100px" name="publicCode">
+				<option value="">所有</option>
 				<option value="grade">年级</option>
-				<option value="c">C</option>
-				
+				<option value="schoolYear">学年</option>
+				<option value="selectIsOpen">选课状态</option>
 			</select>
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="searchParam()">查询</a>
 		</form>

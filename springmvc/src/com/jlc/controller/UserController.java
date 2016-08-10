@@ -47,6 +47,17 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 我的信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/myInfo", method = RequestMethod.GET)
+    public String myInfo() {
+        return "admin/myInfo";
+    }
+    
+    
+    /**
      * 学生信息管理页
      *
      * @return
