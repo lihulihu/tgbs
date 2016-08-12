@@ -1,11 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
-<!DOCTYPE html>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@ include file="/commons/basejs.jsp" %>
-<meta http-equiv="X-UA-Compatible" content="edge" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <base href="<%=basePath%>">
+    <%@ include file="/commons/basejs.jsp" %>
+	<meta http-equiv="X-UA-Compatible" content="edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户管理</title>
     <script type="text/javascript">
 
@@ -42,7 +47,7 @@
                 field : 'capacity',
                 hidden : false
             },{
-                width : '120',
+                width : '150',
                 title : '专业',
                 field : 'organizationName'
             },{
@@ -59,8 +64,29 @@
                 field : 'occupied'
             },{
                 width : '80',
+                title : '可选人数',
+                field : 'capacity'
+            },{
+                width : '80',
                 title : '分类',
                 field : 'courseclass'
+            }, {
+                field : 'action',
+                title : '操作',
+                width : 200,
+                formatter : function(value, row, index) {
+                    var str = '';
+                        
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
+                       
+                            str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
+                        
+                            str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-look" data-options="plain:true,iconCls:\'icon-search\'" onclick="lookFun(\'{0}\');" >详细</a>', row.id);
+                        
+                    return str;
+                }
             }] ],
             onLoadSuccess:function(data){
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
@@ -118,7 +144,7 @@
         });
     }
     
-    function editFun(id) {
+   function editFun(id) {
         if (id == undefined) {
             var rows = dataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -127,14 +153,14 @@
         }
         parent.$.modalDialog({
             title : '编辑',
-            width : 500,
+            width : 600,
             height : 300,
-            href : '${path }/user/editPage?id=' + id,
+            href : '${path }/course/editPage?id=' + id,
             buttons : [ {
-                text : '确定',
+                text : '保存',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#userEditForm');
+                    var f = parent.$.modalDialog.handler.find('#courseEditForm');
                     f.submit();
                 }
             } ]
@@ -174,7 +200,7 @@
         </ul>
     </div>
     <div id="toolbar" style="display: none;">
-        <shiro:hasPermission name="/user/add">
+        <shiro:hasPermission name="/course/add">
             <a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
         </shiro:hasPermission>
     </div>

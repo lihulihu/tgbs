@@ -17,7 +17,7 @@ public class Course implements Serializable {
 	
 	private String description;
 	
-	private String capacity;
+	private long capacity;
 	
 	private long major;
 	
@@ -57,11 +57,11 @@ public class Course implements Serializable {
 		this.description = description;
 	}
 
-	public String getCapacity() {
+	public long getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(String capacity) {
+	public void setCapacity(long capacity) {
 		this.capacity = capacity;
 	}
 

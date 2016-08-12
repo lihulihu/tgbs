@@ -142,4 +142,53 @@ public class CourseController extends BaseController {
     public String addPage() {
         return "admin/courseAdd";
     }
+    
+    /**
+     * 编辑课程页
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("/editPage")
+    public String editPage(Long id, Model model) {
+        Course course = null;
+		try {
+			course = courseService.findCourseById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        model.addAttribute("course", course);
+        return "admin/courseEdit";
+    }
+    
+    /**
+     * 编辑课程
+     *
+     * @param userVo
+     * @return
+     */
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Object edit(Course course) {
+    	Course course1 = null;
+		try {
+			course1 = courseService.findCourseByCourseName(course.getCourseName());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        if (course1 != null && course1.getId() != course.getId()) {
+            return renderError("用户名已存在!");
+        }
+        
+        try {
+        	courseService.updateCourse(course);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return renderSuccess("修改成功！");
+    }
 }

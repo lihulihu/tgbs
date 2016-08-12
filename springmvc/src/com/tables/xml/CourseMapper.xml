@@ -5,12 +5,12 @@
     <id column="course_id" jdbcType="INTEGER" property="id" />
     <result column="course_name" jdbcType="VARCHAR" property="courseName" />
     <result column="course_Desc" jdbcType="VARCHAR" property="description" />
-    <result column="course_Capacity" jdbcType="VARCHAR" property="capacity" />
+    <result column="course_Capacity" jdbcType="INTEGER" property="capacity" />
     <result column="organization_id" jdbcType="INTEGER" property="organizationId" />
     <result column="course_Grade" jdbcType="INTEGER" property="grade" />
     <result column="course_credit" jdbcType="INTEGER" property="credit" />
     <result column="course_occupied" jdbcType="INTEGER" property="occupied" />
-    <result column="course_class" jdbcType="INTEGER" property="courseclass" />
+    <result column="course_class" jdbcType="VARCHAR" property="courseclass" />
   </resultMap>
   <sql id="Base_Column_List">
     course_id, course_name, course_Desc, course_Capacity, organization_id, course_Grade, course_credit, course_occupied, course_class
@@ -63,10 +63,11 @@
   
   <insert id="insert" parameterType="com.jlc.bean.Course">
     insert into course (course_name, course_Desc, 
-      course_Capacity, organization_id, course_Grade
+      course_Capacity, organization_id, course_Grade, course_credit, course_occupied, course_class
       )
     values (#{courseName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{capacity,jdbcType=VARCHAR}, #{organizationId,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}
+      #{capacity,jdbcType=INTEGER}, #{organizationId,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, #{credit,jdbcType=INTEGER},
+      #{occupied,jdbcType=INTEGER}, #{courseclass,jdbcType=VARCHAR}
       )
   </insert>
 
