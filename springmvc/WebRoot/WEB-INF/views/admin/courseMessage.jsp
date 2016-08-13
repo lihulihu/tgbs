@@ -161,7 +161,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             } ]
         });
     }
-    
+    function lookFun(id){
+    	 parent.$.modalDialog({
+             title : '课程信息',
+             width : 800,
+             height : 550,
+             href : '${path }/course/lookPage?id=' + id,            
+         });
+    }
     function searchFun() {
         dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
     }

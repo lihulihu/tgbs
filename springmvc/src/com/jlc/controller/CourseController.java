@@ -209,4 +209,24 @@ public class CourseController extends BaseController {
 		}
         return renderSuccess("删除成功！");
     }
+    
+    /**
+     * 查看课程页
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("/lookPage")
+    public String lookPage(Long id, Model model) {
+        Course course = null;
+		try {
+			course = courseService.findCourseById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        model.addAttribute("course", course);
+        return "admin/courseInfo";
+    }
 }
