@@ -2,7 +2,6 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        var roleIds = ${roleIds };
         $('#organizationId').combotree({
             url : '${path }/organization/tree',
             parentField : 'pid',
@@ -10,29 +9,12 @@
             panelHeight : 'auto',
             value : '${course.organizationId}'
         });
-
- 		$('#grade').combobox({
-            url : '${path }/publicParam/grade',          
-            valueField:'publicValueId',
-			textField:'publicValueName',
-			lines : true,
-            value : '${course.grade}'
-        });
-
-        $('#roleIds').combotree({
-            url : '${path }/role/tree',
-            parentField : 'pid',
-            lines : true,
-            panelHeight : 'auto',
-            multiple : true,
-            required : true,
-            cascadeCheck : false,
-            value : roleIds
-        });
-
-        $('#courseEditForm').form({
+ 
+         $('#courseEditForm').form({
+       
             url : '${path }/course/edit',
             onSubmit : function() {
+            alert("md");
                 progressLoad();
                 var isValid = $(this).form('validate');
                 if (!isValid) {
@@ -66,35 +48,27 @@
                 <tr>
                     <td>课程名</td>
                     <td><input name="id" type="hidden"  value="${course.id}">
-                    <input name="courseName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value="${course.coursename}"></td>
+                    <input name="courseName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value="${course.courseName}"></td>
                     <td>课程描述</td>
-                    <td><input name="description" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${user.name}"></td>
+                    <td><input name="description" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.description}"></td>
                 </tr>
                 <tr>
                     <td>课程容量</td>
-                    <td><input type="capacity" name="occupied" placeholder="不更改不填"/></td>
+                    <td><input name="capacity" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.capacity}"></td>
 					<td>专业</td>
                     <td><select id="organizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
                 </tr>
                 <tr>
                     <td>年级</td>
-                    <td>
-                        <input id="grade" name="grade" style="width: 140px; height: 29px;"/>
-                    </td>
+					<td><input name="grade" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.grade}"></td>
                     <td>学分</td>
-                    <td>
-                    	<input id="credit" name="credit" style="width: 140px; height: 29px;"/>
-                    </td>
+                    <td><input name="credit" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.credit}"></td>
                 </tr>
                 				<tr>
                 	<td>限选人数</td>
-                    <td>
-                        <input id="occupied" name="occupied" style="width: 140px; height: 29px;"/>
-                    </td>					
+                    <td><input name="occupied" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.occupied}"></td>					
                 	<td>分类</td>
-                    <td>
-                        <input id="courseclass" name="courseclass" style="width: 140px; height: 29px;"/>
-                    </td>
+                    <td><input name="courseclass" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.courseclass}"></td>
                 </tr>
             </table>
         </form>

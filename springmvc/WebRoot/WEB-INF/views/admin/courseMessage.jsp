@@ -114,18 +114,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
     
     function deleteFun(id) {
+    	alert("id is "+id);
         if (id == undefined) {//点击右键菜单才会触发这个
             var rows = dataGrid.datagrid('getSelections');
             id = rows[0].id;
+     
         } else {//点击操作里面的删除图标会触发这个
             dataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
-        parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
+        parent.$.messager.confirm('询问', '您是否要删除当前课程？', function(b) {
             if (b) {
-                var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
-                if (currentUserId != id) {
                     progressLoad();
-                    $.post('${path }/user/delete', {
+                    $.post('${path }/course/delete', {
                         id : id
                     }, function(result) {
                         if (result.success) {
@@ -134,17 +134,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         }
                         progressClose();
                     }, 'JSON');
-                } else {
-                    parent.$.messager.show({
-                        title : '提示',
-                        msg : '不可以删除自己！'
-                    });
-                }
             }
         });
     }
     
-   function editFun(id) {
+    function editFun(id) {
         if (id == undefined) {
             var rows = dataGrid.datagrid('getSelections');
             id = rows[0].id;
@@ -158,9 +152,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             href : '${path }/course/editPage?id=' + id,
             buttons : [ {
                 text : '保存',
-                handler : function() {
+                handler : function() {               	
                     parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
                     var f = parent.$.modalDialog.handler.find('#courseEditForm');
+                    alert(f);
                     f.submit();
                 }
             } ]

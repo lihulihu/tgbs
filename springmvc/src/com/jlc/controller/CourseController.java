@@ -172,6 +172,7 @@ public class CourseController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Course course) {
+    	System.out.println("Test test test test test");
     	Course course1 = null;
 		try {
 			course1 = courseService.findCourseByCourseName(course.getCourseName());
@@ -182,7 +183,6 @@ public class CourseController extends BaseController {
         if (course1 != null && course1.getId() != course.getId()) {
             return renderError("用户名已存在!");
         }
-        
         try {
         	courseService.updateCourse(course);
 		} catch (Exception e) {
@@ -190,5 +190,23 @@ public class CourseController extends BaseController {
 			e.printStackTrace();
 		}
         return renderSuccess("修改成功！");
+    }
+    
+    /**
+     * 删除课程
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Object delete(Long id) {
+        try {
+			courseService.deleteCourseById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return renderSuccess("删除成功！");
     }
 }

@@ -23,7 +23,9 @@
   </select>
    	
    <select id="findCoursePageCondition" resultMap="BaseResultMap" parameterType="PageInfo">
-  	 select c.course_name,
+  	 select 
+  	 c.course_id,
+  	 c.course_name,
   	 c.course_Desc,
   	 c.course_Capacity,
   	 c.organization_id,
@@ -71,6 +73,13 @@
       )
   </insert>
 
+   <select id="findCourseByCourseName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from course
+        where course_name = #{courseName}
+    </select>
+
   <update id="updateCourse" parameterType="com.jlc.bean.Course">
     update course
     <set>
@@ -87,10 +96,16 @@
         organization_id = #{organizationId},
       </if>
       <if test="grade != null">
-        course_Grade = #{grade}
+        course_Grade = #{grade},
+      </if>
+      <if test="credit != null">
+        course_credit = #{credit},
+      </if>
+      <if test="occupied != null">
+        course_occupied = #{occupied}
       </if>
     </set>
-    where public_id = #{publicId,jdbcType=INTEGER}
+    where course_id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jlc.bean.Course">
     update publicparam
