@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlc.dao.AnnouncementMapper" >
+  <resultMap id="BaseResultMap" type="com.jlc.bean.Announcement" >
+    <id column="announcement_id" property="announcementId" jdbcType="INTEGER" />
+    <result column="announcement_title" property="announcementTitle" jdbcType="VARCHAR" />
+    <result column="announcement_date" property="announcementDate" jdbcType="DATE" />
+    <result column="announcement_total" property="announcementTotal" jdbcType="INTEGER" />
+    <result column="announcement_abstract" property="announcementAbstract" jdbcType="VARCHAR" />
+    <result column="announcement_text" property="announcementText" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    announcement_id, announcement_title, announcement_date, announcement_total, announcement_abstract, 
+    announcement_text
+  </sql>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="Map">
+   select 
+    <include refid="Base_Column_List" />
+    from announcement
+   <trim prefix="WHERE" prefixOverrides="AND|OR ">
+   	
+   </trim>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from announcement
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from announcement
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlc.bean.Announcement" >
+    insert into announcement (announcement_id, announcement_title, 
+      announcement_date, announcement_total, announcement_abstract, 
+      announcement_text)
+    values (#{announcementId,jdbcType=INTEGER}, #{announcementTitle,jdbcType=VARCHAR}, 
+      #{announcementDate,jdbcType=DATE}, #{announcementTotal,jdbcType=INTEGER}, #{announcementAbstract,jdbcType=VARCHAR}, 
+      #{announcementText,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlc.bean.Announcement" >
+    insert into announcement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="announcementId != null" >
+        announcement_id,
+      </if>
+      <if test="announcementTitle != null" >
+        announcement_title,
+      </if>
+      <if test="announcementDate != null" >
+        announcement_date,
+      </if>
+      <if test="announcementTotal != null" >
+        announcement_total,
+      </if>
+      <if test="announcementAbstract != null" >
+        announcement_abstract,
+      </if>
+      <if test="announcementText != null" >
+        announcement_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="announcementId != null" >
+        #{announcementId,jdbcType=INTEGER},
+      </if>
+      <if test="announcementTitle != null" >
+        #{announcementTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementDate != null" >
+        #{announcementDate,jdbcType=DATE},
+      </if>
+      <if test="announcementTotal != null" >
+        #{announcementTotal,jdbcType=INTEGER},
+      </if>
+      <if test="announcementAbstract != null" >
+        #{announcementAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementText != null" >
+        #{announcementText,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.bean.Announcement" >
+    update announcement
+    <set >
+      <if test="announcementTitle != null" >
+        announcement_title = #{announcementTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementDate != null" >
+        announcement_date = #{announcementDate,jdbcType=DATE},
+      </if>
+      <if test="announcementTotal != null" >
+        announcement_total = #{announcementTotal,jdbcType=INTEGER},
+      </if>
+      <if test="announcementAbstract != null" >
+        announcement_abstract = #{announcementAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementText != null" >
+        announcement_text = #{announcementText,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlc.bean.Announcement" >
+    update announcement
+    set announcement_title = #{announcementTitle,jdbcType=VARCHAR},
+      announcement_date = #{announcementDate,jdbcType=DATE},
+      announcement_total = #{announcementTotal,jdbcType=INTEGER},
+      announcement_abstract = #{announcementAbstract,jdbcType=VARCHAR},
+      announcement_text = #{announcementText,jdbcType=VARCHAR}
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </update>
+</mapper>
