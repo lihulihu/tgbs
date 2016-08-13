@@ -125,14 +125,7 @@
                    	 </div>
 					</c:forEach>
                 </div>
-				<div title="系统管理" selected="true" style="overflow: auto;">
-                    <div class="nav-item">
-                        <a href="javascript:addTab('用户管理','${path}/user/manager','menu_icon_datadeal')">
-                            <span class="menu_icon_datadeal"></span>
-                            <span>用户管理</span>
-                        </a>
-                    </div>
-                    </div>
+				
                 
             </div>
 
@@ -140,8 +133,20 @@
         <div data-options="region:'center'" style="overflow: hidden;">
             <div id="index_tabs" style="overflow: hidden;">
                 <div title="首页" data-options="border:false" style="overflow: hidden;">
-                    <script src='https://git.oschina.net/wangzhixuan/spring-shiro-training/widget_preview'></script> 
+                    <!-- <script src='https://git.oschina.net/wangzhixuan/spring-shiro-training/widget_preview'></script>  -->
                     <%-- <img src="${staticPath }/static/style/images/indeximg6.png"/> --%>
+                     <img src="${staticPath }/static/style/images/logo1.png" style="margin: auto;"/>
+                     <img src="${staticPath }/static/style/images/banner.jpg" style="margin: auto;"/>
+                     <div>
+                     		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成都信息工程大学是四川省和中国气象局共建、四川省重点发展的省属普通本科院校，是以信息学科和大气学科为重点，以学科交叉为特色，
+                     		 工学、理学、管理学为主要学科门类，工学、理学、管理学、经济学、文学、法学、艺术学等多学科协调融合发展的多科性大学，
+                     		 是四川信息产业、中国气象事业、国家统计事业、国防建设人才培养和科学研究的重要基地。
+                     		 学校创建于1951年，前身为中国人民解放军西南空军气象干部训练大队，1956年改制为成都气象学校，1978年升格为成都气象学院；2000年由直属中国气象局划转为四川省人民政府管理，更名为成都信息工程学院；2001年整体合并原隶属于国家统计局的四川统计学校；2003年获硕士学位授予权；2004年成为第一所为第二炮兵部队培养国防生的一般普通本科院校；2007年获得教育部本科教学工作水平评估“优秀”；2010年成为四川省人民政府与中国气象局签约共建高校、国家首批61所“卓越工程师教育培养计划”试点院校；2011年成为全国CDIO工程教育模式试点工作组副组长单位和国际CDIO组织正式成员；2013年入选中西部基础能力建设工程高校；2015年4月，学校正式更名为成都信息工程大学。
+
+       学校现有航空港、龙泉、天府三个校区，占地面积2000余亩，固定资产12.6亿元，各类藏书253万余册；学校现有大气科学学院、资源环境学院、电子工程学院、通信工程学院、控制工程学院、计算机学院、软件工程学院、信息安全工程学院、管理学院、应用数学学院、光电技术学院、外国语学院、政治学院、文化艺术学院、统计学院、商学院、物流学院等17个学院，有全日制在校本科生近20000人，研究生1600余人。
+                     		 
+                     </div>
+                     
                     <style>
                         .pro_name a{color: #4183c4;}
                         .osc_git_title{background-color: #d8e5f1;}
@@ -153,7 +158,8 @@
                 </div>
             </div>
         </div>
-        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2016power by <a href="http://www.dreamlu.net/" target="_blank">成都信息工程大学</a></div>
+        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2016power by <a href="http://www.cuit.edu.cn/" target="_blank">&nbsp;&nbsp;成都信息工程大学</a><span> &nbsp;&nbsp;建议使用IE8.0,1024*768以上浏览 </span></div>
+       
     </div>
 
     <!--[if lte IE 7]>

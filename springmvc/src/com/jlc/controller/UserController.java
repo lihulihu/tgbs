@@ -10,6 +10,9 @@ import com.jlc.service.UserService;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -237,6 +240,39 @@ public class UserController extends BaseController {
         return renderSuccess("修改成功！");
     }
 
+    /**
+     * 保存用户
+     *
+     * @param userVo
+     * @return
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public Object update(UserVo userVo,Model model) {
+    	Subject subject = SecurityUtils.getSubject();
+    	Session session = subject.getSession();
+    	UserVo sessionUser = (UserVo)session.getAttribute("user");
+    	userVo.setId(sessionUser.getId());
+        try {
+			userService.updateUser(userVo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	        
+    	UserVo user = null;
+		try {
+			user = userService.findUserByLoginName(sessionUser.getLoginname());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		session.setAttribute("user",sessionUser);
+		model.addAttribute("msg", "保存成功");
+        return "admin/myInfo";
+    }
+    
+    
     /**
      * 修改密码页
      *

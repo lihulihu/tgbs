@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         
         userMapper.insert(userVo);
 
-       /* Long id = userVo.getId();
+        Long id = userVo.getId();
         String[] roles = userVo.getRoleIds().split(",");
         UserRole userRole = new UserRole();
 
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
             userRole.setUserId(id);
             userRole.setRoleId(Long.valueOf(string));
             userRoleMapper.insert(userRole);
-        }*/
+        }
     }
 
     public void updateUserPwdById(Long userId, String pwd) throws Exception{
@@ -63,21 +63,24 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UserVo userVo) throws Exception{
        
         userMapper.updateByPrimaryKeySelective(userVo);
-        Long id = userVo.getId();
-        List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
-        if (userRoles != null && (!userRoles.isEmpty())) {
-            for (UserRole userRole : userRoles) {
-                userRoleMapper.deleteById(userRole.getId());
-            }
-        }
+        if(userVo.getRoleIds() != null && !"".equals(userVo.getRoleIds())){
+        	 Long id = userVo.getId();
+             List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
+             if (userRoles != null && (!userRoles.isEmpty())) {
+                 for (UserRole userRole : userRoles) {
+                     userRoleMapper.deleteById(userRole.getId());
+                 }
+             }
 
-        String[] roles = userVo.getRoleIds().split(",");
-        UserRole userRole = new UserRole();
-        for (String string : roles) {
-            userRole.setUserId(id);
-            userRole.setRoleId(Long.valueOf(string));
-            userRoleMapper.insert(userRole);
+             String[] roles = userVo.getRoleIds().split(",");
+             UserRole userRole = new UserRole();
+             for (String string : roles) {
+                 userRole.setUserId(id);
+                 userRole.setRoleId(Long.valueOf(string));
+                 userRoleMapper.insert(userRole);
+             }
         }
+       
 
     }
 
