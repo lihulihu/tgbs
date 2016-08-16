@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</thead>
 	</table>
 	<script type="text/javascript">
-	
+		var dataGrid;
 		function removeit(){
 			
 		}
