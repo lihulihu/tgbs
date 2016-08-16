@@ -10,61 +10,56 @@
     var treeGrid;
     $(function() {
         treeGrid = $('#treeGrid').treegrid({
-            url : '${path }/organization/treeGrid',
+            url : '${path }/news/dataGrid',
             idField : 'id',
             treeField : 'name',
             parentField : 'pid',
+            
             fit : true,
             fitColumns : false,
             border : false,
             frozenColumns : [ [ {
-                title : 'id',
-                field : 'id',
+                title : 'announcementId',
+                field : 'announcementId',
                 width : 40,
                 hidden : true
             } ] ],
             columns : [ [ {
-                field : 'code',
+                field : 'announcementId',
                 title : '编号',
                 width : 40
             },{
-                field : 'name',
-                title : '部门名称',
-                width : 180
+                field : 'announcementTitle',
+                title : '公告标题',
+                width : 200
             }, {
-                field : 'seq',
-                title : '排序',
-                width : 40
-            }, {
-                field : 'iconCls',
-                title : '图标',
+                field : 'announcementTotal',
+                title : '点击量',
                 width : 100
             },  {
-                width : '130',
+                width : '100',
                 title : '创建时间',
-                field : 'createdate'
+                field : 'announcementDate'
             },{
-                field : 'pid',
-                title : '上级资源ID',
-                width : 150,
-                hidden : true
+                field : 'announcementAbstract',
+                title : '公告摘要',
+                width : 200             
             }, {
-                field : 'address',
-                title : '地址',
-                width : 120
+                field : 'announcementText',
+                title : '公告内容',
+                width : 300
             } , {
                 field : 'action',
                 title : '操作',
-                width : 130,
+                width : 150,
                 formatter : function(value, row, index) {
                     var str = '';
-                        <shiro:hasPermission name="/organization/edit">
+                       
                             str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
-                        </shiro:hasPermission>
-                        <shiro:hasPermission name="/organization/delete">
+                    
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
                             str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
-                        </shiro:hasPermission>
+                       
                     return str;
                 }
             } ] ],

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jlc.bean.Announcement" >
     <id column="announcement_id" property="announcementId" jdbcType="INTEGER" />
     <result column="announcement_title" property="announcementTitle" jdbcType="VARCHAR" />
-    <result column="announcement_date" property="announcementDate" jdbcType="DATE" />
+    <result column="announcement_date" property="announcementDate" jdbcType="TIMESTAMP"/>
     <result column="announcement_total" property="announcementTotal" jdbcType="INTEGER" />
     <result column="announcement_abstract" property="announcementAbstract" jdbcType="VARCHAR" />
     <result column="announcement_text" property="announcementText" jdbcType="VARCHAR" />

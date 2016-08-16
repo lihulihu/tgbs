@@ -21,9 +21,23 @@ public class NewsController extends BaseController{
 	@Autowired 
 	private AnnouncementService announcementService;
 	
-	 @RequestMapping(value = "/manager", method = RequestMethod.GET)
+	 @RequestMapping(value = "/manage", method = RequestMethod.GET)
 	 public String manager() {
-	     return "admin/news";
+	     return "admin/organization";
+	 }
+	 
+	 @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
+	 @ResponseBody
+	 public Object dataGrid1() {
+		 Map<String,Object> map = new HashMap<String,Object>();
+		 List<Announcement> resultList = null;
+		 try {
+			 resultList = announcementService.selectList(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultList;
+	
 	 }
 	 
 	 @RequestMapping(value = "/all", method = RequestMethod.GET)

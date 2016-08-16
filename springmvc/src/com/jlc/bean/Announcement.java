@@ -3,11 +3,14 @@ package com.jlc.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Announcement implements Serializable {
     private Integer announcementId;
 
     private String announcementTitle;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date announcementDate;
 
     private Integer announcementTotal;

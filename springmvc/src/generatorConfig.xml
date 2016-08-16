@@ -49,7 +49,7 @@
         <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
 
-        <table schema="shiro" tableName="publicParam" domainObjectName="PublicParam"
+        <table schema="shiro" tableName="announcement" domainObjectName="Announcement"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableUpdateByExample="false"
