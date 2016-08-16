@@ -81,7 +81,7 @@
                 title : '编辑',
                 width : 500,
                 height : 300,
-                href : '${path }/organization/editPage?id=' + node.id,
+                href : '${path }/news/editPage?id=' + node.id,
                 buttons : [ {
                     text : '编辑',
                     handler : function() {
