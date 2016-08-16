@@ -32,10 +32,10 @@
     where announcement_id = #{announcementId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jlc.bean.Announcement" >
-    insert into announcement (announcement_id, announcement_title, 
+    insert into announcement (announcement_title, 
       announcement_date, announcement_total, announcement_abstract, 
       announcement_text)
-    values (#{announcementId,jdbcType=INTEGER}, #{announcementTitle,jdbcType=VARCHAR}, 
+    values ( #{announcementTitle,jdbcType=VARCHAR}, 
       #{announcementDate,jdbcType=DATE}, #{announcementTotal,jdbcType=INTEGER}, #{announcementAbstract,jdbcType=VARCHAR}, 
       #{announcementText,jdbcType=VARCHAR})
   </insert>

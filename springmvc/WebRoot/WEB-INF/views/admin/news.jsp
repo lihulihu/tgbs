@@ -41,12 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	 var abstract1 = $self.find("li:first").find("#abstract").html(); //获取摘要
    	 var text = $self.find("li:first").find("#text").html(); //获取内容
    	 var time = $self.find("li:first").find("#time").html(); //获取时间
-   	
    	  	 	 
    	 $self.animate({ "marginTop": -lineHeight + "px" }, 600, function() {  
         $self.css({ marginTop: 0 }).find("li:first").appendTo($self); //appendTo能直接移动元素  
         $('#xtitle').html(title);
-   		 $('#abstract').html(abstract1);
+   		 $('#xabstract').html(abstract1);
    		 $('#xtext').html(text);
    		 $('#xtime').html(new Date(time).Format("yyyy-MM-dd")); 
     });
@@ -64,7 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="scrollNews" >  
         <ul>  
         <c:forEach items="${news}" var="entry">
-            <li style="width:250px;overflow:hidden"><a href="#" title="甜美宽松毛衣今秋一定红.">${entry.getAnnouncementTitle()}</a>
+            <li style="width:250px;overflow:hidden" id="${entry.getAnnouncementId()}">
+            <a href="javascript:void(0);" title="成都信息工程大学公告." onclick="liOnclick(${entry.getAnnouncementId()})">${entry.getAnnouncementTitle()}</a>
             	<span id="title" style="visibility:hidden">${entry.getAnnouncementTitle()}</span>
             	<span id="abstract" style="visibility:hidden">${entry.getAnnouncementAbstract()}</span>
             	<span id="text" style="visibility:hidden">${entry.getAnnouncementText()}</span>
@@ -80,9 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     	<div id="xtitle" style="text-align:center;font-size:20px;width:80%;font-weight:900">${news.get(0).getAnnouncementTitle()}</div>
     	<br>
-    	<div id="xtop" style="text-align:center;font-size:15px;width:80%">
-    		<span id="abstract" style="text-align:center;font-size:20px;width:80%">${news.get(0).getAnnouncementAbstract()}</span>
-    	</div>
+    	
+    	<div id="xabstract" style="text-align:center;font-size:20px;width:80%">${news.get(0).getAnnouncementAbstract()}</div>
+    	<br>
     	<div id="xtext" style="text-align:center;font-size:13px;width:80%">${news.get(0).getAnnouncementText()}</div>
     	<br><br>
     	<div id="xtime" style="text-align:right;font-size:13px;width:80%">
@@ -110,5 +110,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 	} ;
+	liOnclick = function(obj){
+		var $ts = $('#'+obj);
+			
+		var title = $ts.find("#title").html(); //获取标题
+   	 	var abstract1 = $ts.find("#abstract").html(); //获取摘要
+   	    var text = $ts.find("#text").html(); //获取内容
+   	    var time = $ts.find("#time").html(); //获取时间
+
+   	    $('#xtitle').html(title);
+   		$('#xabstract').html(abstract1);
+   		$('#xtext').html(text);
+   		$('#xtime').html(new Date(time).Format("yyyy-MM-dd"));
+	};
   </script>
 </html>

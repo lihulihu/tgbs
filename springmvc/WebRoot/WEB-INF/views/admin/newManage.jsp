@@ -11,10 +11,9 @@
     $(function() {
         treeGrid = $('#treeGrid').treegrid({
             url : '${path }/news/dataGrid',
-            idField : 'id',
+            idField : 'announcementId',
             treeField : 'name',
-            parentField : 'pid',
-            
+               
             fit : true,
             fitColumns : false,
             border : false,
@@ -55,10 +54,10 @@
                 formatter : function(value, row, index) {
                     var str = '';
                        
-                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editFun(\'{0}\');" >编辑</a>', row.announcementId);
                     
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteFun(\'{0}\');" >删除</a>', row.announcementId);
                        
                     return str;
                 }
@@ -79,11 +78,11 @@
         if (node) {
             parent.$.modalDialog({
                 title : '编辑',
-                width : 500,
-                height : 300,
-                href : '${path }/news/editPage?id=' + node.id,
+                width : 800,
+                height : 500,
+                href : '${path }/news/editPage?id=' + node.announcementId,
                 buttons : [ {
-                    text : '编辑',
+                    text : '保存',
                     handler : function() {
                         parent.$.modalDialog.openner_treeGrid = treeGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
                         var f = parent.$.modalDialog.handler.find('#organizationEditForm');
@@ -103,8 +102,8 @@
             parent.$.messager.confirm('询问', '您是否要删除当前资源？删除当前资源会连同子资源一起删除!', function(b) {
                 if (b) {
                     progressLoad();
-                    $.post('${path }/organization/delete', {
-                        id : node.id
+                    $.post('${path }/news/delete', {
+                        id : node.announcementId
                     }, function(result) {
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
@@ -122,9 +121,9 @@
     function addFun() {
         parent.$.modalDialog({
             title : '添加',
-            width : 500,
-            height : 300,
-            href : '${path }/organization/addPage',
+            width : 800,
+            height : 500,
+            href : '${path }/news/addPage',
             buttons : [ {
                 text : '添加',
                 handler : function() {
@@ -144,9 +143,9 @@
         </div>
         
         <div id="toolbar" style="display: none;">
-            <shiro:hasPermission name="/organization/add">
+            
                 <a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
-            </shiro:hasPermission>
+            
         </div>
     </div>
 </body>
