@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlc.dao.SelectMapper" >
+  <resultMap id="BaseResultMap" type="com.jlc.bean.Select" >
+    <id column="select_id" property="selectId" jdbcType="BIGINT" />
+    <result column="select_studentid" property="selectStudentid" jdbcType="BIGINT" />
+    <result column="select_courseid" property="selectCourseid" jdbcType="BIGINT" />
+    <result column="select_teacher" property="selectTeacher" jdbcType="VARCHAR" />
+    <result column="select_time" property="selectTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    select_id, select_studentid, select_courseid, select_teacher, select_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from select
+    where select_id = #{selectId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from select
+    where select_id = #{selectId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jlc.bean.Select" >
+    insert into select (select_id, select_studentid, select_courseid, 
+      select_teacher, select_time)
+    values (#{selectId,jdbcType=BIGINT}, #{selectStudentid,jdbcType=BIGINT}, #{selectCourseid,jdbcType=BIGINT}, 
+      #{selectTeacher,jdbcType=VARCHAR}, #{selectTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlc.bean.Select" >
+    insert into select
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="selectId != null" >
+        select_id,
+      </if>
+      <if test="selectStudentid != null" >
+        select_studentid,
+      </if>
+      <if test="selectCourseid != null" >
+        select_courseid,
+      </if>
+      <if test="selectTeacher != null" >
+        select_teacher,
+      </if>
+      <if test="selectTime != null" >
+        select_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="selectId != null" >
+        #{selectId,jdbcType=BIGINT},
+      </if>
+      <if test="selectStudentid != null" >
+        #{selectStudentid,jdbcType=BIGINT},
+      </if>
+      <if test="selectCourseid != null" >
+        #{selectCourseid,jdbcType=BIGINT},
+      </if>
+      <if test="selectTeacher != null" >
+        #{selectTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="selectTime != null" >
+        #{selectTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.bean.Select" >
+    update select
+    <set >
+      <if test="selectStudentid != null" >
+        select_studentid = #{selectStudentid,jdbcType=BIGINT},
+      </if>
+      <if test="selectCourseid != null" >
+        select_courseid = #{selectCourseid,jdbcType=BIGINT},
+      </if>
+      <if test="selectTeacher != null" >
+        select_teacher = #{selectTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="selectTime != null" >
+        select_time = #{selectTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where select_id = #{selectId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlc.bean.Select" >
+    update select
+    set select_studentid = #{selectStudentid,jdbcType=BIGINT},
+      select_courseid = #{selectCourseid,jdbcType=BIGINT},
+      select_teacher = #{selectTeacher,jdbcType=VARCHAR},
+      select_time = #{selectTime,jdbcType=TIMESTAMP}
+    where select_id = #{selectId,jdbcType=BIGINT}
+  </update>
+</mapper>

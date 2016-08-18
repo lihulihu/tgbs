@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlc.dao.SrMapper" >
+  <resultMap id="BaseResultMap" type="com.jlc.bean.Sr" >
+    <id column="sr_id" property="srId" jdbcType="INTEGER" />
+    <result column="sr_name" property="srName" jdbcType="VARCHAR" />
+    <result column="sr_from" property="srFrom" jdbcType="VARCHAR" />
+    <result column="sr_type" property="srType" jdbcType="VARCHAR" />
+    <result column="sr_grade" property="srGrade" jdbcType="VARCHAR" />
+    <result column="sr_funds" property="srFunds" jdbcType="DOUBLE" />
+    <result column="sr_status" property="srStatus" jdbcType="VARCHAR" />
+    <result column="sr_remark" property="srRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sr_id, sr_name, sr_from, sr_type, sr_grade, sr_funds, sr_status, sr_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sr
+    where sr_id = #{srId,jdbcType=INTEGER}
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="Map">
+   select 
+    <include refid="Base_Column_List" />
+    from sr
+   <trim prefix="WHERE" prefixOverrides="AND|OR ">
+   	
+   </trim>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sr
+    where sr_id = #{srId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlc.bean.Sr" >
+    insert into sr (sr_id, sr_name, sr_from, 
+      sr_type, sr_grade, sr_funds, 
+      sr_status, sr_remark)
+    values (#{srId,jdbcType=INTEGER}, #{srName,jdbcType=VARCHAR}, #{srFrom,jdbcType=VARCHAR}, 
+      #{srType,jdbcType=VARCHAR}, #{srGrade,jdbcType=VARCHAR}, #{srFunds,jdbcType=DOUBLE}, 
+      #{srStatus,jdbcType=VARCHAR}, #{srRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlc.bean.Sr" >
+    insert into sr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="srId != null" >
+        sr_id,
+      </if>
+      <if test="srName != null" >
+        sr_name,
+      </if>
+      <if test="srFrom != null" >
+        sr_from,
+      </if>
+      <if test="srType != null" >
+        sr_type,
+      </if>
+      <if test="srGrade != null" >
+        sr_grade,
+      </if>
+      <if test="srFunds != null" >
+        sr_funds,
+      </if>
+      <if test="srStatus != null" >
+        sr_status,
+      </if>
+      <if test="srRemark != null" >
+        sr_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="srId != null" >
+        #{srId,jdbcType=INTEGER},
+      </if>
+      <if test="srName != null" >
+        #{srName,jdbcType=VARCHAR},
+      </if>
+      <if test="srFrom != null" >
+        #{srFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="srType != null" >
+        #{srType,jdbcType=VARCHAR},
+      </if>
+      <if test="srGrade != null" >
+        #{srGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="srFunds != null" >
+        #{srFunds,jdbcType=DOUBLE},
+      </if>
+      <if test="srStatus != null" >
+        #{srStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="srRemark != null" >
+        #{srRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.bean.Sr" >
+    update sr
+    <set >
+      <if test="srName != null" >
+        sr_name = #{srName,jdbcType=VARCHAR},
+      </if>
+      <if test="srFrom != null" >
+        sr_from = #{srFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="srType != null" >
+        sr_type = #{srType,jdbcType=VARCHAR},
+      </if>
+      <if test="srGrade != null" >
+        sr_grade = #{srGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="srFunds != null" >
+        sr_funds = #{srFunds,jdbcType=DOUBLE},
+      </if>
+      <if test="srStatus != null" >
+        sr_status = #{srStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="srRemark != null" >
+        sr_remark = #{srRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sr_id = #{srId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlc.bean.Sr" >
+    update sr
+    set sr_name = #{srName,jdbcType=VARCHAR},
+      sr_from = #{srFrom,jdbcType=VARCHAR},
+      sr_type = #{srType,jdbcType=VARCHAR},
+      sr_grade = #{srGrade,jdbcType=VARCHAR},
+      sr_funds = #{srFunds,jdbcType=DOUBLE},
+      sr_status = #{srStatus,jdbcType=VARCHAR},
+      sr_remark = #{srRemark,jdbcType=VARCHAR}
+    where sr_id = #{srId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -15,28 +15,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jlc.bean.Announcement;
-import com.jlc.bean.Course;
-import com.jlc.bean.Organization;
+import com.jlc.bean.Sr;
 import com.jlc.commons.base.BaseController;
-import com.jlc.service.AnnouncementService;
+import com.jlc.service.SrService;
 @Controller
-@RequestMapping("/news")
-public class NewsController extends BaseController{
+@RequestMapping("/sr")
+public class SrController extends BaseController{
 	@Autowired 
-	private AnnouncementService announcementService;
+	private SrService srService;
 	
 	 @RequestMapping(value = "/manage", method = RequestMethod.GET)
 	 public String manager() {
-	     return "admin/newManage";
+	     return "admin/srManage";
 	 }
 	 
 	 @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
 	 @ResponseBody
 	 public Object dataGrid1() {
 		 Map<String,Object> map = new HashMap<String,Object>();
-		 List<Announcement> resultList = null;
+		 List<Sr> resultList = null;
 		 try {
-			 resultList = announcementService.selectList(map);
+			 resultList = srService.selectList(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,11 +48,11 @@ public class NewsController extends BaseController{
 		 Map<String,Object> map = new HashMap<String,Object>();
 		 List<Announcement> resultList = null;
 		 try {
-			 resultList = announcementService.selectList(map);
+			 //resultList = srService.selectList(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("news", resultList);
+		model.addAttribute("sr", resultList);
 		return "admin/news";
 	 }
 	    
@@ -67,16 +66,16 @@ public class NewsController extends BaseController{
 	     */
 	    @RequestMapping("/editPage")
 	    public String editPage(HttpServletRequest request, Long id) {
-	    	Announcement announcement = null;
+	    	Sr sr = null;
 			try {
-				announcement = announcementService.selectByPrimaryKey(new Integer(id.toString()));
+				sr = srService.selectByPrimaryKey(new Integer(id.toString()));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	        request.setAttribute("announcement", announcement);
-	        return "admin/newManageEdit";
+	        request.setAttribute("sr", sr);
+	        return "admin/SrEdit";
 	    }
 	    
 	    /**
@@ -87,13 +86,13 @@ public class NewsController extends BaseController{
 	     */
 	    @RequestMapping("/edit")
 	    @ResponseBody
-	    public Object edit(Announcement announcement) {
+	    public Object edit(Sr sr) {
 	    	try {
-				announcementService.updateByPrimaryKeySelective(announcement);
+				srService.updateByPrimaryKeySelective(sr);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	        return renderSuccess("编辑成功！");
+	        return renderSuccess("保存成功！");
 	    }
 	    
 	    
@@ -107,7 +106,7 @@ public class NewsController extends BaseController{
 	    @ResponseBody
 	    public Object delete(Long id) {
 	    	try {
-				announcementService.deleteByPrimaryKey(new Integer(id.toString()));
+				srService.deleteByPrimaryKey(new Integer(id.toString()));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -124,7 +123,7 @@ public class NewsController extends BaseController{
 	     */
 	    @RequestMapping("/addPage")
 	    public String addPage() {
-	        return "admin/newManageAdd";
+	        return "admin/SrAdd";
 	    }
 
 	    /**
@@ -135,11 +134,11 @@ public class NewsController extends BaseController{
 	     */
 	    @RequestMapping("/add")
 	    @ResponseBody
-	    public Object add(Announcement announcement) {
+	    public Object add(Sr sr) {
 	    	try {
-	    		announcement.setAnnouncementTotal(new Integer(10));
-	    		announcement.setAnnouncementDate(new Date());
-				announcementService.insert(announcement);
+	    		//sr.setAnnouncementTotal(new Integer(10));
+	    		//sr.setAnnouncementDate(new Date());
+				srService.insert(sr);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
