@@ -25,10 +25,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             striped : true,
             rownumbers : true,
             pagination : true,
-            singleSelect : true,
+            singleSelect : false,
             idField : 'id',
             sortName : 'createdate',
-            checkOnSelect: false, selectOnCheck: false,
+            checkOnSelect: true, selectOnCheck: true,
             sortOrder : 'asc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
@@ -90,16 +90,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var personIds = [];
 		var departmentIds = [];
 		var selectedRow = $('#dataGrid').datagrid('getSelections');
+		alert(selectedRow.length);
 		if (selectedRow.length == 0) {
 			$.messager.alert('操作提示', "请至少选择一个课程！", 'warning');
 			return;
 		}
-		for ( var i = 0; i < selectedRow.length; i++) {
-			personIds.push(selectedRow[i].personId);
-			departmentIds.push(selectedRow[i].user_departmentID);
+		else{
+			/* for(i=0;i<selectedRow.length;i++){
+			alert(selectedRow[i].id);
+			} */
+			progressLoad();
+            $.post('${path }/select/insert', {
+            	selectedRow : selectedRow
+            }, function(result) {
+            if (result.success) {
+            	parent.$.messager.alert('提示', result.msg, 'info');
+            	dataGrid.datagrid('reload');
+            }
+            progressClose();
+            }, 'JSON');
 		}
-		var personId = personIds.join(',');
-		var departmentId = departmentIds.join(',');
     }
     
     </script>
