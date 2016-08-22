@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlc.dao.SrItemMapper" >
+  <resultMap id="BaseResultMap" type="com.jlc.bean.SrItem" >
+    <id column="s_sr_id" property="sSrId" jdbcType="INTEGER" />
+    <result column="s_sr_studentId" property="sSrStudentid" jdbcType="INTEGER" />
+    <result column="s_sr_srId" property="sSrSrid" jdbcType="INTEGER" />
+    <result column="s_sr_start" property="sSrStart" jdbcType="VARCHAR" />
+    <result column="s_sr_zhong" property="sSrZhong" jdbcType="VARCHAR" />
+    <result column="s_sr_end" property="sSrEnd" jdbcType="VARCHAR" />
+    <result column="s_sr_sunmary" property="sSrSunmary" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    s_sr_id, s_sr_studentId, s_sr_srId, s_sr_start, s_sr_zhong, s_sr_end, s_sr_sunmary
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_sr_item
+    where s_sr_id = #{sSrId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByMap" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from s_sr_item
+    <trim prefix="WHERE" prefixOverrides="AND|OR ">
+    	<if test="sSrSrid != null">
+    		and s_sr_srId = ${sSrSrid}
+    	</if>
+    	<if test="sSrStudentid != null">
+    		and s_sr_studentId = ${sSrStudentid}
+    	</if>
+    	<if test="sSrId != null">
+    		and s_sr_id = ${sSrId}
+    	</if>
+    </trim>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from s_sr_item
+    where s_sr_id = #{sSrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlc.bean.SrItem" >
+    insert into s_sr_item (s_sr_id, s_sr_studentId, s_sr_srId, 
+      s_sr_start, s_sr_zhong, s_sr_end, 
+      s_sr_sunmary)
+    values (#{sSrId,jdbcType=INTEGER}, #{sSrStudentid,jdbcType=INTEGER}, #{sSrSrid,jdbcType=INTEGER}, 
+      #{sSrStart,jdbcType=VARCHAR}, #{sSrZhong,jdbcType=VARCHAR}, #{sSrEnd,jdbcType=VARCHAR}, 
+      #{sSrSunmary,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlc.bean.SrItem" >
+    insert into s_sr_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sSrId != null" >
+        s_sr_id,
+      </if>
+      <if test="sSrStudentid != null" >
+        s_sr_studentId,
+      </if>
+      <if test="sSrSrid != null" >
+        s_sr_srId,
+      </if>
+      <if test="sSrStart != null" >
+        s_sr_start,
+      </if>
+      <if test="sSrZhong != null" >
+        s_sr_zhong,
+      </if>
+      <if test="sSrEnd != null" >
+        s_sr_end,
+      </if>
+      <if test="sSrSunmary != null" >
+        s_sr_sunmary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sSrId != null" >
+        #{sSrId,jdbcType=INTEGER},
+      </if>
+      <if test="sSrStudentid != null" >
+        #{sSrStudentid,jdbcType=INTEGER},
+      </if>
+      <if test="sSrSrid != null" >
+        #{sSrSrid,jdbcType=INTEGER},
+      </if>
+      <if test="sSrStart != null" >
+        #{sSrStart,jdbcType=VARCHAR},
+      </if>
+      <if test="sSrZhong != null" >
+        #{sSrZhong,jdbcType=VARCHAR},
+      </if>
+      <if test="sSrEnd != null" >
+        #{sSrEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="sSrSunmary != null" >
+        #{sSrSunmary,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.bean.SrItem" >
+    update s_sr_item
+    <set >
+      <if test="sSrStudentid != null" >
+        s_sr_studentId = #{sSrStudentid,jdbcType=INTEGER},
+      </if>
+      <if test="sSrSrid != null" >
+        s_sr_srId = #{sSrSrid,jdbcType=INTEGER},
+      </if>
+      <if test="sSrStart != null" >
+        s_sr_start = #{sSrStart,jdbcType=VARCHAR},
+      </if>
+      <if test="sSrZhong != null" >
+        s_sr_zhong = #{sSrZhong,jdbcType=VARCHAR},
+      </if>
+      <if test="sSrEnd != null" >
+        s_sr_end = #{sSrEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="sSrSunmary != null" >
+        s_sr_sunmary = #{sSrSunmary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where s_sr_id = #{sSrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlc.bean.SrItem" >
+    update s_sr_item
+    set s_sr_studentId = #{sSrStudentid,jdbcType=INTEGER},
+      s_sr_srId = #{sSrSrid,jdbcType=INTEGER},
+      s_sr_start = #{sSrStart,jdbcType=VARCHAR},
+      s_sr_zhong = #{sSrZhong,jdbcType=VARCHAR},
+      s_sr_end = #{sSrEnd,jdbcType=VARCHAR},
+      s_sr_sunmary = #{sSrSunmary,jdbcType=VARCHAR}
+    where s_sr_id = #{sSrId,jdbcType=INTEGER}
+  </update>
+</mapper>

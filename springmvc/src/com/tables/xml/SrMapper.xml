@@ -20,6 +20,15 @@
     from sr
     where sr_id = #{srId,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectByUserId" resultType="Map" parameterType="Map" >
+    select 
+    *
+    from s_sr_item ss  left join sr s
+    on s.sr_id = ss.s_sr_id
+    where ss.s_sr_studentId = ${studentId}   	  
+  </select>
+  
   <select id="selectList" resultMap="BaseResultMap" parameterType="Map">
    select 
     <include refid="Base_Column_List" />

@@ -1,7 +1,9 @@
 package com.jlc.service.impl;
 
+import com.jlc.dao.SrItemMapper;
 import com.jlc.dao.UserMapper;
 import com.jlc.dao.UserRoleMapper;
+import com.jlc.bean.SrItem;
 import com.jlc.bean.UserRole;
 import com.jlc.service.UserService;
 import com.jlc.commons.utils.PageInfo;
@@ -12,7 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,6 +27,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
+    
+    @Autowired
+    private SrItemMapper srItemMapper;
 
     public UserVo findUserByLoginName(String username) throws Exception{
         return userMapper.findUserByLoginName(username);
@@ -50,6 +57,9 @@ public class UserServiceImpl implements UserService {
             userRole.setRoleId(Long.valueOf(string));
             userRoleMapper.insert(userRole);
         }
+        SrItem srItem = new SrItem();
+    	srItem.setsSrId(new Integer(userVo.getSrId()));
+    	srItem.setsSrStudentid(new Integer(userVo.getId().toString()));
     }
 
     public void updateUserPwdById(Long userId, String pwd) throws Exception{
@@ -57,7 +67,15 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserVo findUserVoById(Long id) throws Exception{
-        return userMapper.findUserVoById(id);
+    	 Map<String,Object> map = new HashMap<String,Object> ();
+         map.put("sSrStudentid", id);
+         List<SrItem> resultList= srItemMapper.selectByMap(map);
+         UserVo uservo = userMapper.findUserVoById(id);
+         if(resultList!= null && resultList.size()>0){
+        	 uservo.setSrId(resultList.get(0).getsSrId().toString());
+         }
+         
+        return  uservo;
     }
 
     public void updateUser(UserVo userVo) throws Exception{
@@ -81,6 +99,20 @@ public class UserServiceImpl implements UserService {
              }
         }
        
+        Map<String,Object> map = new HashMap<String,Object> ();
+        map.put("sSrStudentid", userVo.getId());
+        List<SrItem> resultList= srItemMapper.selectByMap(map);
+        if(resultList!= null && resultList.size()>0){
+        	SrItem srItem = resultList.get(0);
+        	srItem.setsSrId(new Integer(userVo.getSrId()));
+        	srItemMapper.updateByPrimaryKeySelective(srItem);
+        }else{
+        	SrItem srItem = new SrItem();
+        	srItem.setsSrId(new Integer(userVo.getSrId()));
+        	srItem.setsSrStudentid(new Integer(userVo.getId().toString()));
+        }
+        
+       
 
     }
 
@@ -91,6 +123,12 @@ public class UserServiceImpl implements UserService {
             for (UserRole userRole : userRoles) {
                 userRoleMapper.deleteById(userRole.getId());
             }
+        }
+        Map<String,Object> map = new HashMap<String,Object> ();
+        map.put("sSrStudentid", id);
+        List<SrItem> resultList= srItemMapper.selectByMap(map);
+        if(resultList != null && resultList.size()>0){
+        	srItemMapper.deleteByPrimaryKey(resultList.get(0).getsSrId());
         }
     }
 

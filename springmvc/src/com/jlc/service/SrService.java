@@ -19,4 +19,6 @@ public interface SrService {
 	public int updateByPrimaryKey(Sr record);
 	
 	public List<Sr> selectList(Map<String,Object> map);
+	
+	public  Map<String,Object> selectByUserId(Map<String,Object> map);
 }

@@ -18,6 +18,14 @@
 			lines : true,
             value : '${user.grade}'
         });
+        
+        $('#sr').combobox({
+            url : '${path }/sr/dataGrid',          
+            valueField:'srId',
+			textField:'srName',
+			lines : true,
+            value : '${user.srId}'
+        });
 
         $('#roleIds').combotree({
             url : '${path }/role/tree',
@@ -104,6 +112,13 @@
                             <option value="0">正常</option>
                             <option value="1">停用</option>
                     </select></td>
+                </tr>
+                
+                 <tr>
+                    <td >科研项目</td>
+                    <td colspan="3">
+                    	<input id="sr" name="sr" style="width: 300px; height: 29px;"/>
+                    </td>                    
                 </tr>
             </table>
         </form>

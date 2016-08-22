@@ -83,6 +83,8 @@ public class UserVo implements Serializable {
 
     private Date createdateStart;
     private Date createdateEnd;
+    
+    private String srId;
 
     private static final long serialVersionUID = 1L;
 
@@ -342,6 +344,14 @@ public class UserVo implements Serializable {
 
 	public void setGradeName(String gradeName) {
 		this.gradeName = gradeName;
+	}
+
+	public String getSrId() {
+		return srId;
+	}
+
+	public void setSrId(String srId) {
+		this.srId = srId;
 	}
     
 }

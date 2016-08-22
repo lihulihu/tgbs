@@ -24,6 +24,13 @@
             panelHeight : 'auto'
         });
 
+		$('#sr').combobox({
+            url : '${path }/sr/dataGrid',          
+            valueField:'srId',
+			textField:'srName',
+			lines : true
+         
+        });
         $('#userAddForm').form({
             url : '${path }/user/add',
             onSubmit : function() {
@@ -98,6 +105,12 @@
                                 <option value="1">停用</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
+                    <td >科研项目</td>
+                    <td colspan="3">
+                    	<input id="sr" name="sr" style="width: 300px; height: 29px;"/>
+                    </td>                    
                 </tr>
             </table>
         </form>

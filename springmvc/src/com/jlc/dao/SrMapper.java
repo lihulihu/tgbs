@@ -20,4 +20,6 @@ public interface SrMapper {
     int updateByPrimaryKey(Sr record);
     
     public List<Sr> selectList(Map<String,Object> map);
+    
+    Map<String,Object> selectByUserId(Map<String,Object> map);
 }

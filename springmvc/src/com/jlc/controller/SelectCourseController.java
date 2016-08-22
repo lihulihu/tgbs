@@ -1,4 +1,4 @@
-package com.jlc.controller;
+/*package com.jlc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +22,12 @@ public class SelectCourseController extends BaseController{
         return "admin/selectCourse";
     }
 	
-    /**
+    *//**
      * 插入选课记录
      *
      * @param userVo
      * @return
-     */
+     *//*
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Object add(Course course) {
@@ -56,3 +56,4 @@ public class SelectCourseController extends BaseController{
         return renderSuccess("添加成功");
     }
 }
+*/

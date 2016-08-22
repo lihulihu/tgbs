@@ -40,4 +40,8 @@ public class SrServiceImpl implements SrService{
 	public List<Sr> selectList(Map<String,Object> map){
 		return srMapper.selectList(map);
 	}
+	
+	public  Map<String,Object> selectByUserId(Map<String,Object> map){
+		return srMapper.selectByUserId(map);
+	}
 }

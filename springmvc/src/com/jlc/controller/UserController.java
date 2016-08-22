@@ -230,11 +230,10 @@ public class UserController extends BaseController {
         if (user != null && user.getId() != userVo.getId()) {
             return renderError("用户名已存在!");
         }
-        userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+        //userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
         try {
 			userService.updateUser(userVo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return renderSuccess("修改成功！");
