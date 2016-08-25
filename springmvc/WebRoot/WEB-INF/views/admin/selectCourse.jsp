@@ -90,18 +90,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var personIds = [];
 		var departmentIds = [];
 		var selectedRow = $('#dataGrid').datagrid('getSelections');
-		alert(selectedRow.length);
+    	var selected = new Array();
+   		if (selectedRow.length>0) {
+   			for (var k=0;k<selectedRow.length;k++) {
+   				selected.push(selectedRow[k]);
+   			}
+   		}
+		
+		var s = "?selected="+JSON.stringify(selected); 
+		
+		/* alert(selectedRow.length); */
 		if (selectedRow.length == 0) {
 			$.messager.alert('操作提示', "请至少选择一个课程！", 'warning');
 			return;
 		}
 		else{
-			/* for(i=0;i<selectedRow.length;i++){
+			for(i=0;i<selectedRow.length;i++){
 			alert(selectedRow[i].id);
-			} */
+			}
 			progressLoad();
-            $.post('${path }/select/insert', {
-            	selectedRow : selectedRow
+            $.post('${path }/select/insert'+s, {
+            	SelectedCourse : selectedRow
             }, function(result) {
             if (result.success) {
             	parent.$.messager.alert('提示', result.msg, 'info');

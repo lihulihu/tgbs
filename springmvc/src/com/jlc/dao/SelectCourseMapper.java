@@ -2,17 +2,21 @@ package com.jlc.dao;
 
 import java.util.List;
 
-import com.jlc.bean.Select;
+import com.jlc.bean.selectCourse;
 import com.jlc.commons.result.UserVo;
 import com.jlc.commons.utils.PageInfo;
 
 public interface SelectCourseMapper {
-    /**
-     * 添加课程
-     *
-     * @param select
-     * @return
-     */
-    int insert(Select select);
+    int deleteByPrimaryKey(Long selectId);
+
+    int insert(selectCourse record);
+
+    int insertSelective(selectCourse record);
+
+    selectCourse selectByPrimaryKey(Long selectId);
+
+    int updateByPrimaryKeySelective(selectCourse record);
+
+    int updateByPrimaryKey(selectCourse record);
 
 }

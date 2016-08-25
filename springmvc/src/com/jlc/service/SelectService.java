@@ -1,18 +1,18 @@
 package com.jlc.service;
 
-import com.jlc.bean.Select;
+import com.jlc.bean.selectCourse;
 
 public interface SelectService {
   
     int deleteByPrimaryKey(Long selectId);
 
-    int insert(Select record);
+    int insert(selectCourse record);
 
-    int insertSelective(Select record);
+    int insertSelective(selectCourse record);
 
-    Select selectByPrimaryKey(Long selectId);
+    selectCourse selectByPrimaryKey(Long selectId);
 
-    int updateByPrimaryKeySelective(Select record);
+    int updateByPrimaryKeySelective(selectCourse record);
 
-    int updateByPrimaryKey(Select record);
+    int updateByPrimaryKey(selectCourse record);
 }
