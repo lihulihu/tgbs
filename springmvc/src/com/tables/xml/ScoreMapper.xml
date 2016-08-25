@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlc.dao.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.jlc.bean.Score" >
+    <id column="score_id" property="scoreId" jdbcType="INTEGER" />
+    <result column="select_id" property="selectId" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="is_again" property="isAgain" jdbcType="VARCHAR" />
+    <result column="times_score" property="timesScore" jdbcType="VARCHAR" />
+    <result column="test_score" property="testScore" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    score_id, select_id, score, is_again, times_score, test_score
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectScoreByStudentId" parameterType="Map" resultType="Map">
+  
+  	select 
+  	c.course_name as courseName,
+  	c.course_class as courseClass,
+  	c.course_credit as courseCredit,
+  	sc.times_score as timesScore,
+  	sc.test_score as testScore,
+  	sc.score as value,
+  	sc.score_id as scoreId,
+  	'numberbox' as editor,
+  	p.public_value_name as "group"
+  	
+  	from selectcourse s 
+  	left join course c on c.course_id = s.select_courseid
+  	left join score sc on sc.select_id=s.select_id
+  	left join user u on u.id = s.select_studentid
+  	left join publicparam p on p.public_code='schoolYear' and p.public_value_id = s.select_year
+  	where u.id = ${studentId}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlc.bean.Score" >
+    insert into score (score_id, select_id, score, 
+      is_again, times_score, test_score
+      )
+    values (#{scoreId,jdbcType=INTEGER}, #{selectId,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, 
+      #{isAgain,jdbcType=VARCHAR}, #{timesScore,jdbcType=VARCHAR}, #{testScore,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlc.bean.Score" >
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        score_id,
+      </if>
+      <if test="selectId != null" >
+        select_id,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="isAgain != null" >
+        is_again,
+      </if>
+      <if test="timesScore != null" >
+        times_score,
+      </if>
+      <if test="testScore != null" >
+        test_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="selectId != null" >
+        #{selectId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgain != null" >
+        #{isAgain,jdbcType=VARCHAR},
+      </if>
+      <if test="timesScore != null" >
+        #{timesScore,jdbcType=VARCHAR},
+      </if>
+      <if test="testScore != null" >
+        #{testScore,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlc.bean.Score" >
+    update score
+    <set >
+      <if test="selectId != null" >
+        select_id = #{selectId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgain != null" >
+        is_again = #{isAgain,jdbcType=VARCHAR},
+      </if>
+      <if test="timesScore != null" >
+        times_score = #{timesScore,jdbcType=VARCHAR},
+      </if>
+      <if test="testScore != null" >
+        test_score = #{testScore,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlc.bean.Score" >
+    update score
+    set select_id = #{selectId,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      is_again = #{isAgain,jdbcType=VARCHAR},
+      times_score = #{timesScore,jdbcType=VARCHAR},
+      test_score = #{testScore,jdbcType=VARCHAR}
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+</mapper>
