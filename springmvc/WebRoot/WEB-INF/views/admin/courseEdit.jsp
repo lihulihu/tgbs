@@ -64,11 +64,15 @@
                     <td>学分</td>
                     <td><input name="credit" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.credit}"></td>
                 </tr>
-                				<tr>
+                <tr>
                 	<td>限选人数</td>
                     <td><input name="occupied" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.occupied}"></td>					
                 	<td>分类</td>
                     <td><input name="courseclass" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.courseclass}"></td>
+                </tr>
+                <tr>
+                	<td>任课教师</td>
+                    <td><input name="courseTeacher" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${course.courseTeacher}"></td>					
                 </tr>
             </table>
         </form>

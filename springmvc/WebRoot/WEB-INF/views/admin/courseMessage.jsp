@@ -70,6 +70,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 width : '80',
                 title : '分类',
                 field : 'courseclass'
+            },{
+                width : '80',
+                title : '任课教师',
+                field : 'courseTeacher'
             }, {
                 field : 'action',
                 title : '操作',

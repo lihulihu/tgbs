@@ -14,7 +14,7 @@ public class selectCourse implements Serializable {
 
     private Date selectTime;
     
-    private Long selectYear;
+    private String selectYear;
 
     private static final long serialVersionUID = 1L;
 
@@ -58,11 +58,11 @@ public class selectCourse implements Serializable {
         this.selectTime = selectTime;
     }
     
-    public Long getselectYear() {
+    public String getselectYear() {
 		return selectYear;
 	}
 
-	public void setselectYear(Long selectYear) {
+	public void setselectYear(String selectYear) {
 		this.selectYear = selectYear;
 	}
 

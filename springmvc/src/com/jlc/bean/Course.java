@@ -32,6 +32,8 @@ public class Course implements Serializable {
 	private Integer organizationId;
 	
 	private String organizationName;
+	
+	private String courseTeacher;
 
 	public long getId() {
 		return id;
@@ -119,6 +121,14 @@ public class Course implements Serializable {
 
 	public void setOrganizationName(String organizationName) {
 		this.organizationName = organizationName;
+	}
+	
+	public String getCourseTeacher() {
+		return courseTeacher;
+	}
+
+	public void setCourseTeacher(String courseTeacher) {
+		this.courseTeacher = courseTeacher;
 	}
 
 	@Override

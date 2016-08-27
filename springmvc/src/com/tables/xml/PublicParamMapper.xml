@@ -60,13 +60,16 @@
     from publicparam
     <trim prefix="WHERE" prefixOverrides="AND|OR ">
     <if test = "publicCode != null and publicCode != ''">
-    	public_code = #{publicCode}
+    	and public_code = #{publicCode}
     </if>
     <if test = "publicId != null and publicId != ''">
-    	public_id = #{publicId}
+    	and public_id = #{publicId}
     </if>
 	<if test = "publicValueId != null and publicValueId != ''">
-    	public_value_id = #{publicValueId}
+    	and public_value_id = #{publicValueId}
+    </if>
+    <if test = "status != null and status != ''">
+    	and status = #{status}
     </if>
     </trim>
   </select>

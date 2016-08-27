@@ -26,7 +26,7 @@
     insert into selectCourse (select_id, select_studentid, select_courseid, 
       select_teacher, select_time,select_year)
     values (#{selectId,jdbcType=BIGINT}, #{selectStudentid,jdbcType=BIGINT}, #{selectCourseid,jdbcType=BIGINT}, 
-      #{selectTeacher,jdbcType=VARCHAR}, #{selectTime,jdbcType=TIMESTAMP}, #{selectYear})
+      #{selectTeacher,jdbcType=VARCHAR}, now(), #{selectYear})
   </insert>
   <insert id="insertSelective" parameterType="com.jlc.bean.selectCourse" >
     insert into selectCourse

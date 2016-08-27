@@ -84,6 +84,12 @@
                         <input id="courseclass" name="courseclass" style="width: 140px; height: 29px;"/>
                     </td>
                 </tr>
+                				<tr>
+                	<td>限选人数</td>
+                    <td>
+                        <input id="courseTeacher" name="courseTeacher" style="width: 140px; height: 29px;"/>
+                    </td>					
+                </tr>
             </table>
         </form>
     </div>

@@ -68,6 +68,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<td width=100 align=center bgcolor="#faf4ff">分类：</td>
 		<td width=620 colspan=5 align=center>${course.courseclass}</td>
 	</tr>
+		<tr height=50  >
+		<td width=100 align=center bgcolor="#faf4ff">任课教师：</td>
+		<td width=620 colspan=5 align=center>${course.courseTeacher}</td>
+	</tr>
 
 	
 </table>

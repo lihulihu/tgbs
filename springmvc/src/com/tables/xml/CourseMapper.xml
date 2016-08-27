@@ -11,9 +11,10 @@
     <result column="course_credit" jdbcType="INTEGER" property="credit" />
     <result column="course_occupied" jdbcType="INTEGER" property="occupied" />
     <result column="course_class" jdbcType="VARCHAR" property="courseclass" />
+    <result column="course_teacher" jdbcType="VARCHAR" property="courseTeacher" />
   </resultMap>
   <sql id="Base_Column_List">
-    course_id, course_name, course_Desc, course_Capacity, organization_id, course_Grade, course_credit, course_occupied, course_class
+    course_id, course_name, course_Desc, course_Capacity, organization_id, course_Grade, course_credit, course_occupied, course_class, course_teacher
   </sql>
   <select id="findCourseById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,6 +34,7 @@
   	 c.course_credit,
   	 c.course_occupied,
   	 c.course_class,
+  	 c.course_teacher,
   	 s.name AS organizationName
     from course c
     LEFT JOIN organization s ON s.id = c.organization_id
@@ -65,11 +67,11 @@
   
   <insert id="insert" parameterType="com.jlc.bean.Course">
     insert into course (course_name, course_Desc, 
-      course_Capacity, organization_id, course_Grade, course_credit, course_occupied, course_class
+      course_Capacity, organization_id, course_Grade, course_credit, course_occupied, course_class, course_teacher
       )
     values (#{courseName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{capacity,jdbcType=INTEGER}, #{organizationId,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, #{credit,jdbcType=INTEGER},
-      #{occupied,jdbcType=INTEGER}, #{courseclass,jdbcType=VARCHAR}
+      #{occupied,jdbcType=INTEGER}, #{courseclass,jdbcType=VARCHAR}, #{courseTeacher,jdbcType=VARCHAR}
       )
   </insert>
 
@@ -102,7 +104,10 @@
         course_credit = #{credit},
       </if>
       <if test="occupied != null">
-        course_occupied = #{occupied}
+        course_occupied = #{occupied},
+      </if>
+      <if test="courseTeacher != null">
+        course_teacher = #{courseTeacher}
       </if>
     </set>
     where course_id = #{id,jdbcType=INTEGER}
