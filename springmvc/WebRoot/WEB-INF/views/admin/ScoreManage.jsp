@@ -39,7 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				groupFormatter: groupFormatter,
 			
 				columns:[[ 
-						{field:'scoreId',title:'id',width:100,sortable:true,hidden:true},  
+						{field:'scoreId',title:'id',width:100,sortable:true,hidden:true}, 
+						{field:'selectId',title:'selectId',width:100,sortable:true,hidden:true}, 
          				{field:'courseName',title:'课程名',width:100,sortable:true},
    		   			    {field:'courseClass',title:'所属分类',width:100,resizable:false},
    		                {field:'courseCredit',title:'学分',width:100,sortable:true},
@@ -236,7 +237,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </ul>
     </div>
     
-    <div data-options="region:'east',border:true,title:'用户列表'," style="width:43%">
+    <div data-options="region:'east',border:true,title:'成绩列表'," style="width:43%">
        <table class="easyui-propertygrid" style="width:500px" id="tt">
 
 	</table>
@@ -250,14 +251,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var s =0;
 			var p=0;
 			var tt = 0;
+			var y = 0;
 			for(var i = 0;i<rows.length;i++){
 				if(parseInt(rows[i].value) >= 60){
 					s=s+parseInt(rows[i].courseCredit);
 				}
 				t=t+parseInt(rows[i].courseCredit);
-				tt=tt+parseInt(rows[i].value);
+				if(rows[i].value != null && rows[i].value != ''){
+					tt=tt+parseInt(rows[i].value);
+					y+=1;
+				}
+				
 			}
-			p = tt/rows.length;
+			if(y!=0){
+				p = tt/y;
+			}
+						
 			return fvalue + ' - <span style="color:red">' + rows.length +'条记录，共' + t + '个学分，实获' + s + '个学分;平均分：'+p+'</span>';
 		}
 		function getChanges(){		

@@ -29,8 +29,10 @@
   	sc.test_score as testScore,
   	sc.score as value,
   	sc.score_id as scoreId,
+  	s.select_id as selectId,
   	'numberbox' as editor,
   	p.public_value_name as "group"
+  
   	
   	from selectcourse s 
   	left join course c on c.course_id = s.select_courseid
@@ -39,7 +41,30 @@
   	left join publicparam p on p.public_code='schoolYear' and p.public_value_id = s.select_year
   	where u.id = ${studentId}
   </select>
+  <select id="selectScoreByStudentId1" parameterType="Map" resultType="Map">
   
+  	select 
+  	c.course_name as courseName,
+  	c.course_class as courseClass,
+  	c.course_credit as courseCredit,
+  	sc.times_score as timesScore,
+  	sc.test_score as testScore,
+  	sc.score as score,
+  	sc.score_id as scoreId,
+  	s.select_id as selectId,
+  	'numberbox' as editor,
+  	p.public_value_name as "group",
+  	o.name as "name",
+  	s.select_teacher as teacher
+  	
+  	from selectcourse s 
+  	left join course c on c.course_id = s.select_courseid
+  	left join score sc on sc.select_id=s.select_id
+  	left join user u on u.id = s.select_studentid
+  	left join publicparam p on p.public_code='schoolYear' and p.public_value_id = s.select_year
+  	left join organization o on o.id=c.organization_id
+  	where u.id = ${studentId}
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from score

@@ -20,4 +20,6 @@ public interface ScoreMapper {
     
     List<Map<String,Object>> selectScoreByStudentId(Map<String,Object> map);
     
+    List<Map<String,Object>> selectScoreByStudentId1(Map<String,Object> map);
+    
 }

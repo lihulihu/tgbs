@@ -9,6 +9,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,38 +67,7 @@ public class MyScoreController extends BaseController{
         Map<String,Object> map = new HashMap<>();
         map.put("studentId",studentId);
         list = scoreServer.selectScoreByStudentId(map);        
-        /*Map<String,Object> map = new HashMap<String,Object>();
-        Map<String,Object> map1 = new HashMap<String,Object>();
-        Map<String,Object> map2 = new HashMap<String,Object>();
-        map.put("courseName", "java");
-        map.put("courseClass", "编程");
-        map.put("courseCredit", "3");
-        map.put("timesScore", "78");
-        map.put("testScore", "88");
-        map.put("group", "2011~2012学年");
-        map.put("editor", "numberbox");
-        map.put("value", "74");
-        list.add(map);
-        
-        map2.put("courseName", "C语言");
-        map2.put("courseClass", "编程");
-        map2.put("courseCredit", "3");
-        map2.put("timesScore", "98");
-        map2.put("testScore", "88");
-        map2.put("group", "2011~2012学年");
-        map2.put("editor", "numberbox");
-        map2.put("value", "90");
-        list.add(map2);
-        
-        map1.put("courseName", "马克思");
-        map1.put("courseClass", "政治");
-        map1.put("courseCredit", "2");
-        map1.put("timesScore", "90");
-        map1.put("testScore", "80");
-        map1.put("group", "2012~2013学年");
-        map1.put("editor", "numberbox");
-        map1.put("value", "80");
-        list.add(map1);*/
+       
         return list;
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -117,7 +89,12 @@ public class MyScoreController extends BaseController{
 			
 			 if(updateList.size()>0){
 				 for(int i =0;i<updateList.size(); i++){
-					 scoreServer.updateByPrimaryKeySelective(updateList.get(i));
+					 if(updateList.get(i).getScoreId() == null){
+						 scoreServer.insertSelective(updateList.get(i));
+					 }else{
+						 scoreServer.updateByPrimaryKeySelective(updateList.get(i));
+					 }
+					 
 				 }
 			 }
 			 
@@ -125,4 +102,24 @@ public class MyScoreController extends BaseController{
 			e.printStackTrace();
 		}
 	}
+    
+    
+    
+    /**
+     * 获取登录人成绩信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/myScore1", method = RequestMethod.GET)
+    @ResponseBody
+    public Object dataGrid1() {
+        List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
+        Map<String,Object> parammap = new HashMap<>();
+        Subject subject = SecurityUtils.getSubject();
+    	Session session = subject.getSession();
+    	UserVo sessionUser = (UserVo)session.getAttribute("user");
+        parammap.put("studentId",sessionUser.getId());
+        list = scoreServer.selectScoreByStudentId1(parammap);        
+        return list;
+    }
 }

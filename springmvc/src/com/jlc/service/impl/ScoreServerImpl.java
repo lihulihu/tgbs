@@ -40,4 +40,8 @@ public class ScoreServerImpl implements ScoreServer{
 	public List<Map<String,Object>> selectScoreByStudentId(Map<String,Object> map){
 		return scoreMapper.selectScoreByStudentId(map);
 	}
+	
+	public List<Map<String,Object>> selectScoreByStudentId1(Map<String,Object> map){
+		return scoreMapper.selectScoreByStudentId1(map);
+	}
 }
