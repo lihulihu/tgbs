@@ -370,5 +370,7 @@
         </where>
     </select>
 
-    
+    <select id="queryAllStudent" resultType = "Map">
+	select id,grade from user where usertype = '1'
+</select>
 </mapper>

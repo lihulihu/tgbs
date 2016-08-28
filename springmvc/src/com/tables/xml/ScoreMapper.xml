@@ -151,4 +151,36 @@
       test_score = #{testScore,jdbcType=VARCHAR}
     where score_id = #{scoreId,jdbcType=INTEGER}
   </update>
+  <select id="autoTest"  parameterType="Map" resultType="Map">
+  	select c.*
+  	from course c 
+  	where c.ismust = '1' and c.course_Grade = ${grade} and
+  	not exists
+  	(select c.*
+  	from selectcourse sc
+  	left join course c on c.course_id = sc.select_courseid
+  	
+  	where c.ismust = '1' and c.course_Grade = ${grade} and sc.select_studentid = ${studentId}
+  	)
+  </select>
+  <insert id = "batchAddSelectCourse" parameterType="ArrayList">
+  	insert into selectcourse
+  	(
+  		
+  		select_studentid,
+  		select_courseid,
+  		select_teacher,
+  		select_time,
+  		select_year
+  	)values
+  	<foreach collection="list" item="obj" index="index" separator="," >  
+       (   
+       	#{obj.selectStudentid},
+       	#{obj.selectCourseid},
+       	#{obj.selectTeacher},
+       	now(),
+       	#{obj.selectYear}
+       )  
+    </foreach>
+  </insert>
 </mapper>

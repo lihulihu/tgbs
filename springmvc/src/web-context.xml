@@ -54,4 +54,37 @@
       		 <property name="maxUploadSize" value="10485760000" />
        		<property name="maxInMemorySize" value="40960" />
  	</bean>
+ 	
+ 	<!-- 自动任务，必修课程 -->
+ 	<bean id="taskService" class="com.jlc.service.impl.AutoTestServerImpl"></bean>
+	<bean  id="autoTask"  class ="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	     <property  name="targetObject">
+	     	<ref  bean="taskService"/>  
+	     </property>
+	     <property name="targetMethod">
+	      	<value>selectCourseIsMust</value>
+	     </property>
+	</bean>
+ 	<!-- 配置触发器 -->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+       <property name="jobDetail">
+           <ref bean="autoTask" />
+       </property>
+       <property name="cronExpression">
+           <value>0/10 * * * * ?</value>
+       </property>
+
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+       <!-- 添加触发器 -->
+       <property name="triggers">
+           <list>
+              <ref local="cronTrigger" />
+           </list>
+       </property>
+       <property name="autoStartup">
+	     	<value>true</value>
+		</property>
+    </bean>
 </beans>

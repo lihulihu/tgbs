@@ -1,6 +1,7 @@
 package com.jlc.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -65,4 +66,5 @@ public interface UserMapper {
      */
     List<Course> findSelectedCourseById(Long id) throws Exception;
 
+    List<Map<String,Object>> queryAllStudent();
 }
