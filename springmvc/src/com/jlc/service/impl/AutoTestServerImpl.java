@@ -54,6 +54,7 @@ public class AutoTestServerImpl {
 					selectList.add(select);
 				}
 				scoreMapper.batchAddSelectCourse(selectList);
+				System.out.println("用户"+list.get(i).get("id").toString()+"新增条必须课程");
 			}
 		}
 		System.out.println("自动任务结束");
