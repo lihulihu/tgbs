@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.jlc.bean.Course;
 import com.jlc.commons.result.UserVo;
 import com.jlc.commons.utils.PageInfo;
 
@@ -56,5 +57,12 @@ public interface UserMapper {
      */
 
     UserVo findUserVoById(Long id);
+    
+    /**
+     * 根据id获取已选课程
+     *
+     * @param id
+     */
+    List<Course> findSelectedCourseById(Long id) throws Exception;
 
 }

@@ -1,5 +1,8 @@
 package com.jlc.service;
 
+import java.util.List;
+
+import com.jlc.bean.Course;
 import com.jlc.commons.utils.PageInfo;
 import com.jlc.commons.result.UserVo;
 
@@ -68,5 +71,12 @@ public interface UserService {
      * @param id
      */
     void deleteUserById(Long id) throws Exception;
+    
+    /**
+     * 根据id获取已选课程
+     *
+     * @param id
+     */
+    List<Course> findSelectedCourseById(Long id) throws Exception;
 
 }

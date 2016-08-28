@@ -72,7 +72,7 @@ public class SelectCourseController extends BaseController{
     
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public Object seveParam(HttpServletRequest request){		
+	public Object seveParam(HttpServletRequest request){
 		
 		String updatedJason= request.getParameter("selected");
 		List<PublicParam> resultList = null;

@@ -3,6 +3,7 @@ package com.jlc.service.impl;
 import com.jlc.dao.SrItemMapper;
 import com.jlc.dao.UserMapper;
 import com.jlc.dao.UserRoleMapper;
+import com.jlc.bean.Course;
 import com.jlc.bean.SrItem;
 import com.jlc.bean.UserRole;
 import com.jlc.service.UserService;
@@ -131,5 +132,12 @@ public class UserServiceImpl implements UserService {
         	srItemMapper.deleteByPrimaryKey(resultList.get(0).getsSrId());
         }
     }
+    
+
+    public List<Course> findSelectedCourseById(Long id) throws Exception {
+    	List<Course> courselist= userMapper.findSelectedCourseById(id);
+    	System.out.println("用户已选"+courselist.size()+"门课程");
+    	return courselist;
+	}
 
 }

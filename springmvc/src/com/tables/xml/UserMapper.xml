@@ -70,6 +70,15 @@
             <result column="roleName" property="name"/>
         </collection>
     </resultMap>
+    
+    <resultMap id="userSelectedCourseMap" type="com.jlc.commons.result.UserVo">
+        <id column="select_id" property="select_id" jdbcType="BIGINT"/>
+        <result column="select_studentid" property="select_studentid" jdbcType="BIGINT"/>
+        <result column="select_courseid" property="select_courseid" jdbcType="BIGINT"/>
+        <result column="select_teacher" property="select_teacher" jdbcType="VARCHAR"/>
+        <result column="select_time" property="select_time" jdbcType="TIMESTAMP"/>
+        <result column="select_year" property="select_year" jdbcType="VARCHAR"/>
+    </resultMap>
   <sql id="Base_Column_List">
     id, loginname, name, password, sex, age, usertype, status, organization_id, createdate, 
     phone, school, profession, interest, place, height, nation, birthday, remark, photo, 
@@ -344,6 +353,20 @@
         LEFT JOIN publicparam p ON p.public_code="grade" and p.public_value_id = t.grade
         <where>
             t.id = #{id}
+        </where>
+    </select>
+    
+    <select id="findSelectedCourseById" resultMap="userSelectedCourseMap" parameterType="java.lang.Long">
+        SELECT
+        select_id,
+        select_studentid,
+        select_courseid,
+        select_teacher,
+        select_time,
+        select_year
+        FROM selectcourse
+        <where>
+            select_studentid = #{id}
         </where>
     </select>
 
